@@ -1,0 +1,297 @@
+---
+title: "Ch2 methods"
+output: 
+  pdf_document:
+    df_print: kable
+    fig_caption: true
+    latex_engine: xelatex
+mainfont: Calibri 
+fontsize: 11pt
+header-includes:
+   - \usepackage{setspace}
+   - \doublespacing
+   - \setlength{\parskip}{1em}
+bibliography: references.bib
+csl: elsevier-harvard2.csl
+---
+```{r setup, include=FALSE}
+#set global options for code chunks
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+#load required packages
+library(tinytex)
+
+```
+We need to consider; species characteristics (density and detectability) and their relationship with the optimal size of plot, and the relationship of both of these to required effort (set up and survey time). We also need to consider
+survey time, to enable comparison with ds ‐ ds accounts for missed individuals with the detection function, error rates are low, so a similar level of error should be sought for the quadrats.
+Notes:
+
+* what is the relationship between species characteristics and optimal plot size?
+* optimal: minimising variance, where the variance arises from number of plots, with a constraint on cost?
+* if you have a fixed sample area, is there an optimal number of plots? Or just more is better?  
+* minimum plot size; 1m x 1m, cost is low - set up cost minimal, find the spot and plop the frame down, if stratum/site area is large, travel between plots may incur higher cost.
+* set up cost and travel time as percentage of overall plot cost? Or percentage of budget?
+
+* input should be required error rate and species characteristics - outputs are ideal plot size and time to survey
+
+* side note: what is the standard definition for how many plots/what survey area to cover?
+* something to do with within and between plot variance 
+#detection rate and time for plot sample??
+
+#Notes on sampling theory
+
+From @thompsonSampling2012
+Stratification: given a sample size $n$, the choice of how to allocate among strata, $n_{h}$ can be; 
+
+* equal ($n_{h} = \frac{n}{L}$, where $L$ is the number of strata), 
+* proportional to the size of the strata (if they differ in size; $n_{h}=\frac{nN_{h}}{N}$, where N is the total number of sampling units in the population, or survey area),
+* optimal, where the variance of the estimated population mean or total is minimised, $n_{h}= \frac{nN_{h}\sigma_{h}}{\sum_{k=1}^L N_{k}\sigma_{k}}$, where $\sigma_{h}$ is the sd for stratum $h$, $k$ is the not clear - seems to be the same as h,
+* can incorporate costs, for a fixed total cost $c$, $$n_{h}=\frac{(c-c_{0})N_{h}\sigma_{h}/\sqrt{c_{h}}}{\sum{k=1}^L N_{k}\sigma_{k}\sqrt{c_{k}}}$$, where $c_{0}$ is the 'overhead' or one-off costs, and $c_{h}$ (and $c_{k}$?) is the cost in stratum $h$.  
+* the latter allocation gives larger sample size to larger or more variable strata, and smaller sample sizes to more expensive or more difficult to sample strata.
+
+* From Guru's draft paper: the number of individuals detected [in a quadrat] follows a thinned Poisson process (Cox and Isham 1980), i.e. $$N_{d}\sim Poiss(\lambda A_{q} q)$$. $q$ here is the probability of detection of an individual in the quadrat ($N_{d}$ is N detected, $A_{q}$ is the area of the quadrat and $\lambda$ is defined as individuals per unit area). For ref, $$q=1-e^{-\frac{W_{e}vT}{A_{q}}}$$, where the numerator in the exponent is the 'effective area' searched, or $W_{e}$ is effective search strip width, and the search path length L is expressed as the product of velocity, $v$, and time, $T$.
+
+The theory leading to the equation for *q* comes from the 'random search' model, where observers follow some path through the search area, as distinct from a systematic 'exhaustive search'.  This does not apply for smaller plots, e.g. where observers are on their hands and knees and the whole plot is visible at once.  Is it silly to think about field of vision? E.g. apply the random search assuming that the eye moves around the plot in a 'random' path? 
+
+Search time to get to the required level of error (near-perfect detection)
+
+For the equation above we need *W*~e~, which comes from the detection function; this can be a stand-in number until I get to the ds part of the survey.  Also needed are the plot size *A*~q~ (which we determine using standard recommendations), and velocity *v*.  As $vT=L$ we can either use *L* or *T* for search effort.  
+
+If searching a plot, individuals will generally try to be systematic and avoid covering the same area twice, so as to avoid double counting individuals.  In larger examples (lower density targets) the individuals can be marked, e.g. with flag tape, so double counting is avoided.
+
+```{r}
+
+#start by using equivalent effort; what do we need to know?
+
+budget <- 8*60 #minutes
+
+#species / survey characteristics
+#_________________________________
+dha <- 2000 #pop density per ha
+dm <- dha/10000 #same pop density per m^2
+siteArea <- 50 #ha
+siteAreaM <- siteArea*1000
+
+#ds survey 
+#__________________________
+sigm <- 2 #in m
+w <- 5
+mu <- sqrt(pi*(sigm^2)/2) #is this the same as the formula in Guru's paper for We?
+E <- 2*mu*dm
+pace <- 2/60 # mins per m of transect
+dsCostT <- E*0.5+pace # minutes per m of transect (walking and measuring)
+dsCost0 <- 15 # one-off costs (transect set-up)
+# note if we include heterogeneity in density, we will need to use multiple transects, lower cost per transect
+
+
+####### DS SIMULATIONS ########
+#_____________________________#
+nSims <- 1000
+myDsSim <- data.frame("simID" = numeric(length = nSims), "dhat" = numeric(nSims))
+
+for (simID in 1:nSims){
+  sim <- myDsSurvey(dm, budget, dsCostT, dsCost0, sigm, w, siteAreaM)
+  myDsSim[simID,1] <- simID
+  myDsSim[simID,"dhat"] <- sim$dht$individuals$bysample$Dhat
+  print(simID)
+}
+
+myDsSim$error <- myDsSim$dhat-dm
+myDsSim$method <- "DS"
+
+#Plot survey preliminary: single value of q
+#______________________
+plotSize <- 100 # m^2
+expN <- dm*plotSize
+q <- 0.9
+We <- 2*mu #assuming the same strip width as with ds
+
+#pars based on single value of q, don't run
+plotCostSetUp <- 10 
+plotCostSearch <- (log(1-q)*plotSize)/-We #this can be path length
+v <- 0.5 #average speed in m/s
+t <- plotCostSearch/v #time searching each plot for q=0.99 in s
+plotT <- t/120
+nPlots <- budget/(plotCostSetUp+plotT) 
+
+####### Plot SIMULATIONS ########
+#_______________________________#
+nSims <- 1000
+myPlotSim <- data.frame("simID" = numeric(nSims), "dhat" = numeric(nSims))
+
+for (simID in 1:nSims){
+  nd <- rpois(ceiling(nPlots), lambda = expN*q)
+  myPlotSim[simID,1] <- simID
+  myPlotSim[simID,"dhat"] <- mean(nd)/plotSize
+  print(simID)
+}
+
+myPlotSim$error <- myPlotSim$dhat-dm
+myPlotSim$method <- "plot"
+
+combinedData <- rbind(myDsSim, myPlotSim)
+
+boxplot(combinedData$error~combinedData$method, horizontal = TRUE, xlab = "error(Dhat)",
+        ylab = "method", main = paste0("budget = ", budget, " mins;", "q = ", q))
+
+#write.table(combinedData, "prelimResults.txt")
+
+#read in saved data (above simulations)
+data1 <- read.table("../dataSim/prelimResults.txt")
+boxplot(data1$error~data1$method, horizontal = TRUE, xlab = "error(Dhat)",
+        ylab = "method", main = paste0("budget = ", budget, " mins;", "q = ", q))
+```
+
+Notes: how many plots? Always seems based on budget, where variance is minimised based on stratified variability and costs.  What size of plot is generally not discussed.
+
+Recommended plot size for different species - find in the literature (books on plant surveying, Sutherland, Williams)
+Trade-off of increasing plot size vs moving to new plot - increasing effort at one location vs going to a new location (e.g. time spent in a plot) is well-known; rules of thumb rather than fully optimised (to what extent are they sub-optimal?)
+
+From @sutherlandCensusTechniques pp189-
+
+Quadrat recommendations:
+* 0.01-0.25 m^2^ for bryophyte, lichen algae
+* 0.25-16 m^2^ for grassland, tall-herb, short-shrub, aquatic macrophytes
+* 25-100 m^2^ for tall shrubs
+* 400-2500 m^2^ for trees in woods and forests
+
+These recommendations are based on general rules of thumb: if the species are small, high density or greater diversity in the case of community assessment, these would require smaller quadrats.  Author notes these are the plot sizes 'most often used'.
+
+
+From @kentVegetation2012
+
+"Sampling is discussed at length in Chapter 3. However, in general, this subject has received less attention from vegetation scientists than it should." 
+
+* 0.5 x 0.5 m bryophytes and lichens
+* 1 x 1 - 2 x 2 m Grasslands, dwarf heaths
+* 2 by 2 to 4 by 4 m Shrubby heaths, tall herbs and grassland communities
+* 10 x 10 m Scrub, woodland shrubs, small trees
+* 20 x 20 to 50 x 50 m or plotless sampling for woodland canopies
+
+From @hillHandbook2005
+
+
+
+
+When optimising start with perfect detection, then work out path length/effort to achieve perfect detection.
+
+Things that can affect detectability... flowering status, size (height, spread, leaf size), degree of clumping tendencies??? Dennett et al 2017 paper on cryptic understory plants (decoys) indicates detectability is lower for more clumped species (haven't fully read the paper yet)
+
+```{r}
+#add ds survey as a point
+dsData <- read.table("../dataSim/prelimResults.txt")
+dsData <- dsData[dsData$method == "DS", ]
+#calculate precision and bias
+
+dsP <- myCV(dsData$dhat)
+dsB <- mean(dsData$error)
+
+#Plot survey version 2: creating the function of q
+#______________________
+
+plotSize <- 100 # m^2
+expN <- dm*plotSize
+q <- seq(0.8, 0.99, by = 0.01)
+We <- 2*mu #assuming the same strip width as with ds?
+plotCostSetUp <- 10 
+plotCostSearch <- (log(1-q)*plotSize)/-We #this can be path length
+v <- 0.5 #average speed in m/s
+t <- plotCostSearch/v #time searching each plot for q=0.99 in s
+plotT <- t/60 
+nPlots <- budget/(plotCostSetUp+plotT) 
+
+
+####### Plot SIMULATIONS ########
+#_______________________________#
+nSims <- 10000
+
+for (i in 1:length(q)){
+  myPlotSim <- data.frame("simID" = numeric(nSims), "q" = numeric(nSims), "dhat" = numeric(nSims))
+  
+  for (simID in 1:nSims){
+  nd <- rpois(ceiling(nPlots), lambda = expN*q[i])
+  myPlotSim[simID,1] <- simID
+  myPlotSim[simID,"q"] <- q[i]
+  myPlotSim[simID,"dhat"] <- mean(nd)/plotSize
+  print(paste0("q = ", q[i], "; ", "simulation ", simID))
+  }
+  write.csv(myPlotSim, paste0("../dataSim/prelimResults_q", q[i], ".csv"), row.names = FALSE)
+}
+
+#recompile the data to make the graph
+
+myPlotData <- data.frame("simID" = integer(), "q" = numeric(), "dhat" = numeric())
+
+for(a in 1:length(q)){
+  addData <- read.csv(paste0("../dataSim/prelimResults_q", q[a], ".csv"))
+  myPlotData <- rbind(myPlotData, addData)
+  print(paste0("round ", a))
+}
+
+myPlotData$error <- myPlotData$dhat-dm
+PrecisionPlot <- aggregate(myPlotData$dhat, by = list(myPlotData$q), FUN = myCV)
+
+BiasPlot <- aggregate(myPlotData$error, by = list(myPlotData$q), FUN = mean)
+
+myPlotPlot <- merge(PrecisionPlot, BiasPlot, by = "Group.1")
+names(myPlotPlot) <- c("q", "precision", "bias")
+
+par(mar = c(4,5,4,2), xpd = TRUE)
+plot(myPlotPlot$bias, myPlotPlot$precision,
+     xlab = "bias (mean error)", ylab = "", type = "l", cex.axis = 0.8,
+     main = "prelim sims: q = 0.8-0.99", xlim = c(-0.045, 0.005), ylim = c(0.047, 0.057), las = 1)
+mtext("precision (cv(dhat))", side = 2, line = 3.5)
+points(x = dsB, y = dsP, pch = 8)
+legend(x = -0.04, y = 0.05, legend = "plot surveys", lty = 1, bty = "n")
+legend(x = -0.04, y = 0.049, legend = "ds survey", pch = 8, bty = "n")
+```
+
+```{r}
+mySimVars <- data.frame(plotSize, dm, We, plotCostSetUp, q, plotT, ceiling(nPlots))
+mySimVars
+```
+```{r}
+#how sensitive to costs?
+
+dsCostT1 <- E*0.75+pace # minutes per m of transect (walking and measuring)
+dsCost0 <- 15 # one-off costs (transect set-up)
+# note if we include heterogeneity in density, we will need to use multiple transects, lower cost per transect
+
+####### DS SIMULATIONS ########
+#_____________________________#
+myDsSim <- data.frame("simID" = numeric(length = nSims), "dhat" = numeric(nSims))
+nSims <- 1000
+for (simID in 1:nSims){
+  sim <- myDsSurvey(dm, budget, dsCostT1, dsCost0, sigm, w, siteAreaM)
+  myDsSim[simID,1] <- simID
+  myDsSim[simID,"dhat"] <- sim$dht$individuals$bysample$Dhat
+  print(simID)
+}
+
+myDsSim$error <- myDsSim$dhat-dm
+#write.csv(myDsSim, "../dataSim/prelimDsSims2.csv")
+
+myDsSim2 <- read.csv("../dataSim/prelimDsSims2.csv")
+dsP1 <- myCV(myDsSim2$dhat)
+dsB1 <- mean(myDsSim2$error)
+
+dsLength <- (budget-dsCost0)/dsCostT
+dsLength1 <- (budget-dsCost0)/dsCostT1
+n1 <- dsLength*E
+n2 <- dsLength1*E
+
+#So why is the variance so high on the second set of sims?
+
+plot(myPlotPlot$bias, myPlotPlot$precision,
+     xlab = "bias (mean error)", ylab = "precision (cv(dhat))", type = "l",
+     main = paste0("prelim sims: q = 0.8-0.99, 0.01ha plots, We = ", round(We), " \nd = ", dm, 
+                   ", sigma = ", sigm, ", budget = ", budget, ", plot set up cost = ", plotCostSetUp, " mins"), xlim = c(-0.2, max(myPlotPlot$bias)), ylim = c(0.03, 3.01))
+points(x = dsB, y = dsP, pch = 5)
+points(x = dsB1, y = dsP1, pch = 17)
+
+
+```
+
+```{r}
+sdSimVars1 <- 
+```
+

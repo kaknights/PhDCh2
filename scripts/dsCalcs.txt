@@ -1,0 +1,45 @@
+# General distance calculations for reference
+
+B <- 10000; #budget, in generic units (time to travel 1 unit length of transect)
+
+D <- 0.5 #population density, indivs per m^2
+Cm <- 0.5 #cost to measure distance to one detected target, in mins
+Cl <- 0.1 #cost per unit length of transect (walking, not measuring), in mins 
+#Cl <- E*Cw
+sigm <- 1:10 #parameter for half-normal det func
+w <- 2*sigm #strip half-width, user defined, can be set in m [?????]
+mu <- sqrt(pi*(sigm^2)/2)
+E <-  2*mu*D #encounter rate in indivs per m
+optA <-  ifelse(sqrt(Cl/(2*E*Cm))< 1, sqrt(Cl/(2*E*Cm)), 1) #optimal alpha
+
+optL <-  B/(Cw + E*optA*Cm) #corresponding optimal length of transect
+optArea <- optL*2*w #covered area under optimisation
+fullL <- B/(Cw + (E*Cm)) #length of transect under conventional ds (LTS)
+fullA  <-  fullL*2*w #covered area under LTS
+Cw <- Cl/E #cost of walking per detection
+Rc <- Cm/Cw #cost ratio
+
+
+half-normal formula exp(-y^2/(2*sigm^2)
+
+#calculations for distance sampling variables
+
+#want to be able to vary density and detectability and get the other bits, encounter rate, mu
+
+D <- 0.5 #population density, indivs per m^2
+Cm <- 0.5 #cost to measure distance to one detected target, in mins
+Cl <- 0.1 #cost per unit length of transect (walking, not measuring), in mins 
+#Cl <- E*Cw
+sigm <- 1:10 #parameter for half-normal det func
+w <- 2*sigm #strip half-width, user defined, can be set in m
+mu <- sqrt(pi*(sigm^2)/2)
+E <-  2*mu*D #encounter rate in indivs per m
+optA <-  ifelse(sqrt(Cl/(2*E*Cm))< 1, sqrt(Cl/(2*E*Cm)), 1) #optimal alpha
+
+optL <-  B/(Cw + E*optA*Cm) #corresponding optimal length of transect
+optArea <- optL*2*w #covered area under optimisation
+fullL <- B/(Cw + (E*Cm)) #length of transect under conventional ds (LTS)
+fullA  <-  fullL*2*w #covered area under LTS
+Cw <- Cl/E #cost of walking per detection
+Rc <- Cm/Cw #cost ratio
+B <- 10000; #budget, in generic units (time to travel 1 unit length of transect)

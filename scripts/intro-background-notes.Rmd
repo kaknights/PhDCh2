@@ -1,0 +1,36 @@
+---
+title: "Introduction"
+output: 
+  pdf_document:
+    df_print: kable
+    fig_caption: true
+    latex_engine: xelatex
+mainfont: Calibri 
+fontsize: 11pt
+header-includes:
+   - \usepackage{setspace}
+   - \doublespacing
+   - \setlength{\parskip}{1em}
+bibliography: references.bib
+csl: elsevier-harvard2.csl
+---
+
+
+```{r setup, include=FALSE}
+#set global options for code chunks
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tinytex)
+```
+
+# Notes Ch 2 reading
+
+Notes from @mccarthyDetectability2013;
+
+* Imperfect detection occurs at individual or species level - mark recapture and distance sampling account for detectability of individuals, 'other techniques' developed for species (notes MacKenzie et al 2002, Wintle et al 2004, Royle et al 2005). Things that can influence detectability: species traits, site conditions, survey time, surveyor attributes (not exhaustive)
+* 'survival analysis' framework, simplest model is time to first detection as exponential, where the detection events are a Poisson process with rate $\lambda$ (which is also the single parameter for the exponential distribution). Probability of an event occurring after time *t* is exp(-$\lambda$*t*)
+* Not sure how we get from here to the next bit
+* paper uses log-linear model of detection rate as a function of abundance, log$\lambda$=*b*log*n*+log*k*, where *b* is the scaling parameter for the rate that detection varies with abundance, and *k* is the constant of proportionality.
+* Not sure what this tells us...
+
+Notes from @garrardDetectabiity2013
+
