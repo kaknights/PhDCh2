@@ -65,16 +65,6 @@ remove <- c("setUpDec", "surveyTdec", "timeTot", "timeTotdec", "measureTdec")
 
 myDistDetails <- myDistDetails[ , !(names(myDistDetails) %in% remove)]
 
-##########################################
-#              Correction                #
-##########################################
-
-#one transect was sampled twice (a transcription oopsie), 
-#choose one at random to remove (random choice; remove earlier one)
-myDistDetails <- myDistDetails[!(myDistDetails$transectID==29698 & myDistDetails$date=="2021-10-26"), ]
-
-##########################################
-
 #add a unit time column (same as above for plots)
 myDistDetails$unitTime <- as_hms(myDistDetails$finishTime-myDistDetails$travelStartTime)
 
@@ -288,5 +278,30 @@ mySquadOpt$obsID <- 1:nrow(mySquadOpt)
 mySquadLTS <- merge(x = mySquadLTS_details["transectID"], y = myDistData, by = "transectID")
 mySquadLTS$obsID <- 1:nrow(mySquadLTS)
 
-rm(mySubset, check, datesSelect, exclude, remove, drops, recsExcluded, obsPerTransect, measTime, meanMeasureTime50882,
-   endTime, noNaUnits, start2end3, start30961end29696, travelandClearUp)
+##########################################
+#              Correction                #
+##########################################
+
+#one transect was sampled twice (a transcription oopsie), 
+#choose one at random to remove (random choice; remove earlier one)
+mySmonoOpt_details <- mySmonoOpt_details[!(mySmonoOpt_details$transectID==29698 & mySmonoOpt_details$date=="2021-10-26"), ]
+# this record has no obs in data (no need to remove)
+
+# 27973 sampled twice - first sample was abandoned due to back pain, 
+# marked 'ignore' in 'method' on excel sheet for removal (doesn't appear in details)
+# remove corresponding records in data
+mySmonoLTS <- mySmonoLTS[!(mySmonoLTS$transectID==37973 & mySmonoLTS$date=="2021-10-31"), ]
+
+##########################################
+#check all the observations are paired with a transect on the details list
+allRecords <- merge(myDistDetails, myDistData, by = "transectID", all = TRUE)
+obsOnly <- allRecords[is.na(allRecords$date.x) & allRecords$method!="Ignore", ]
+#zero observed targets that are not linked to a transect in the details list
+#any evidence of bias?
+
+
+rm(mySubset, check, datesSelect, exclude, remove, drops, recsExcluded, 
+   obsPerTransect, measTime, meanMeasureTime50882,endTime, noNaUnits, 
+   start2end3, start30961end29696, travelandClearUp, allRecords, obsOnly,
+   propMeasured, propMeasured_adjust)
+

@@ -27,10 +27,10 @@ myDistSummary[4, 3:5] <- myDistSummaryFunc(details = mySquadOpt_details, observa
 myDistSummary[5, 3:5] <- myDistSummaryFunc(details = mySquadLTS_details, observations = mySquadLTS)
 
 #distance histograms
-hist(mySmonoOpt$perpDist_m, xlab = "perp dist (m)", main = "S mono Optimised")
-hist(mySmonoLTS$perpDist_m, xlab = "perp dist (m)", main = "S mono LTS")
-hist(mySquadOpt$perpDist_m, xlab = "perp dist (m)", main = "S quad Optimised")
-hist(mySquadLTS$perpDist_m, xlab = "perp dist (m)", main = "S quad LTS")
+# hist(mySmonoOpt$perpDist_m, xlab = "perp dist (m)", main = "S mono Optimised")
+# hist(mySmonoLTS$perpDist_m, xlab = "perp dist (m)", main = "S mono LTS")
+# hist(mySquadOpt$perpDist_m, xlab = "perp dist (m)", main = "S quad Optimised")
+# hist(mySquadLTS$perpDist_m, xlab = "perp dist (m)", main = "S quad LTS")
 
 myFreqGrouped <- aggregate.data.frame(x = mySmonoGrouped$count, by = list(mySmonoGrouped$band_m), FUN = sum)
 names(myFreqGrouped) <- c("distBand", "count")
@@ -83,10 +83,5 @@ times[5, 3:6] <- timesDistFunc(x = mySmonoGrouped_details)
 times[7, 3:6] <- timesDistFunc(x = mySquadOpt_details)
 times[8, 3:6] <- timesDistFunc(x = mySquadLTS_details)
 
-#check all the observations are paired with a transect on the details list
-allRecords <- merge(myDistDetails, myDistData, by = "transectID", all = TRUE)
-obsOnly <- allRecords[is.na(allRecords$date.x) & allRecords$method!="Ignore", ]
-#zero observed targets that are not linked to a transect in the details list
-#any evidence of bias?
 
-rm(allRecords, obsOnly, SmonoPlots_unitTime)
+rm(SmonoPlots_unitTime)

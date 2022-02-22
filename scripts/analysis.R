@@ -2,8 +2,64 @@
 # for surveys of high density species: a wildflower case study
 
 source("scripts/summaries.R")
+source("scripts/optVars_pilot.R")
+source("scripts/resampleFunction.R")
 
 library(Distance)
+
+
+######################
+
+#note, maybe remove 23964 from analysis (3 obs, NA on measuring time, 2 sticks were missed)
+#search density equivalent effort? 
+
+
+####################################
+#                                  #
+#    Resampling LTS survey data    #
+#           all methods            #
+#                                  #
+####################################
+Cw <- 0.4831
+Cm <- 0.5805
+effort <- 300
+E  <-  nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m)
+l <- 2
+w <- 2
+target <- "Stackhousia"
+method <- "LTS"
+
+data <- mySmonoLTS
+details <- mySmonoLTS_details
+
+test <- resampleLTStheory(details = mySmonoLTS_details, data = mySmonoLTS,
+                          effort = 300, times = times, 
+                          method = "LTS", target = "Stackhousia", w =2,
+                          E = nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m), 
+                          Cm = 0.5805, Cw = 0.4813, l = 2)
+
+test2 <- resampleLTSfield(details = mySmonoLTS_details, data = mySmonoLTS,
+                          effort = 300, times = times, 
+                          method = "LTS", target = "Stackhousia", w =2)
+
+test3 <- resampleOptTheory(details = mySmonoLTS_details, data = mySmonoLTS, 
+                           effort = 300, times = times, 
+                           method = "Opt", target = "Stackhousia", 
+                           E = nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m), 
+                           Cm = 0.5805, Cw = 0.4813, l = 2, w = 2)
+
+test4 <- resampleOptField(details = mySmonoLTS_details, data = mySmonoLTS, 
+                          effort = 300, times = times, 
+                          method = "Opt", target = "Stackhousia",  
+                          Cm = 0.5805, Cw = 0.4813, w = 2)
+
+test5 <- resampleLTStheory(details = mySquadLTS_details, data = mySquadLTS,
+                           effort = 300, times = times, 
+                           method = "LTS", target = "Senecio", w =10,
+                           E = nrow(mySquadLTS)/sum(mySquadLTS_details$length_m), 
+                           Cm = 0.5805, Cw = 0.4813, l = 2)
+
+
 
 ####################################
 #                                  #
@@ -57,9 +113,9 @@ plot(SmonoLTS_distModel)
 ##### Come back to this when all timings are tidied up ####
 #function to calculate costs:
 #totalSurveyCost <- 
-  
-  #check unit costs for any bonkers start/end times, and notes for if 
-  #we stopped for anything
+
+#check unit costs for any bonkers start/end times, and notes for if 
+#we stopped for anything
 
 # focus on LTs, use for resampling/subsampling, use other actual surveys for effort estimation  
 
@@ -79,49 +135,5 @@ B <- 300
 aOpt <- 0.644
 # adjust measure times to account for the quicker measuring due to second person (use pilot estimates)
 # mu <- sqrt(pi*(sigm^2)/2)
-# optL <-  B/(Cw + E*optA*Cm)
+# optL <-  B/(Ct + E*optA*Cm) or B/(E*(CW+optA*Cm))
 unitCostLTS <- times$mean_unit_time[times$target == "Stackhousia" & times$method == "LTS"]
-
-####################################
-#                                  #
-#    Resampling LTS survey data    #
-#           all methods            #
-#                                  #
-####################################
-
-# how many times to sample for each method (try 10 samples per method)
-# thought: timing - use mean unit time to take sample, but depending on sample, the actual survey time would be different????
-
-#LTS
-
-#writing functions on 'resampleFunction.R'
-
-#Opt
-
-#Grouped
-
-#Grouped without string
-
-#search density equivalent effort? 
-
-######################
-# what is the cost ratio for measuring?
-#note, maybe remove 23964 from analysis (3 obs, NA on measuring time, 2 sticks were missed)
-
-# make sure you know which transects need different treatment for survey/measure (bad back days)
- #question for self: how different are the cost ratios calculated using the different options?
-
-# S mono LTS
-#problem: for S mono LTS, only have measuring from separate measure time (with someone else writing)
-# I think this vastly underestimates measuring cost
-#don't use survey cost? Only use pilot cost?
-RcLTS <- as.numeric(sum(mySmonoLTS_details$timeMeasuring[!(mySmonoLTS_details$transectID %in% dntUseSurveyTime)], na.rm = TRUE))/
-  as.numeric(sum(mySmonoLTS_details$surveyTime[!(mySmonoLTS_details$transectID %in% dntUseSurveyTime)]-mySmonoLTS_details$timeMeasuring[!(mySmonoLTS_details$transectID %in% dntUseSurveyTime)], na.rm = TRUE))
-
-# S mono Opt
-# 
-
-
-#try the same method without the transects where someone else either did or timed the measuring
-
-

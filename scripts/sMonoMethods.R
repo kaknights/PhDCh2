@@ -185,12 +185,12 @@ smTrans <- read_excel(path = "Fieldwork/Evans St/dataRaw.xlsx",
 include <- unique(mySubset$transectID)
 
 transSubset <- smTrans[smTrans$transectID%in%include, ]
-Cm <- sum(transSubset$measureTdec)/nDet
+Cm <- sum(transSubset$measureTdec)/nDet #0.5805
 
 timeSearching <- sum(transSubset$surveyTdec)-sum(transSubset$measureTdec)
-Cw <- timeSearching/nDet #change to Cw, is clearer
+Cw <- timeSearching/nDet #0.4813
 
-Rc <- Cm/Cw
+Rc <- Cm/Cw #1.2
 
 alphaOpt <- sqrt(Cw/(2*Cm))
 # = 0.644
