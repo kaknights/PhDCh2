@@ -10,9 +10,6 @@
 # dist tables are a list (region, sample, observation, data)
 # details table for the resample is added to the list (item 5)
 
-resampleMany <- function(x){
-  
-}
 
 # resample using LTS method - n transects calculated using distance theory and
 # pilot data for costs of measuring and walking per detection
@@ -98,5 +95,21 @@ resampleOptField <- function(details, data, effort, times,
   return(myDistTables)
 }
 
+resampleGrouped <- function(details, data, effort, times, 
+                            method, target, w){
+  t <- times$mean_unit_time[times$target == target & times$method == method]
+  K <- round(effort/t)
+  samp <- sample(details$transectID, K)
+  mydetails <- details[details$transectID %in% samp, ]
+  mydata <- data[data$transectID %in% mydetails$transectID, ]
+  myDistTables <- distTablesGrouped(distDetails = mydetails,
+                             distData = mydata[!is.na(mydata$perpDist_m), ],
+                             w = w)
+  myDistTables[[5]] <- mydetails
+  myDistTables[[6]] <- mydata
+  return(myDistTables)
+}
 
-
+resamplePlots <- function(x){
+  
+}

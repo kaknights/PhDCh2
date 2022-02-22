@@ -118,3 +118,36 @@ distTables <- function(distDetails, distData, w){
   tablesList <- list(region.table, sample.table, obs.table, data)
   return(tablesList)
 }
+
+#function to produce distance tables using LTS data as input, getting grouped
+#as output
+#replace single 'perpDist_m' column with two columns, distbegin and distend
+distTablesGrouped <- function(distDetails, distData, w){
+  region.table <- data.frame("Region.Label" = "EvansSt", "Area" = 
+                               sum(distDetails$length_m)* (2*w))
+  sample.table <- data.frame("Sample.Label" = distDetails$transectID,
+                             "Region.Label" = "EvansSt",
+                             "Effort" = distDetails$length_m)
+  obs.table <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
+                          "Region.Label" = "EvansSt",
+                          "Sample.Label" = distData$transectID[!is.na(distData$perpDist_m)])
+  data <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
+                     "distance" = distData$perpDist_m[!is.na(distData$perpDist_m)])
+  data$distbegin <- ifelse(data$distance <= 0.25, 0, 
+                           ifelse(data$distance> 0.25 & data$distance <= 0.5, 0.25,
+                                  ifelse(data$distance> 0.5 & data$distance <= 1, 0.5, 
+                                         ifelse(data$distance >1 & data$distance <= 1.5, 1,
+                                                1.5)))) 
+
+  data$distend <- ifelse(data$distbegin == 0 | data$distbegin == 0.25, data$distbegin+0.25,
+                         data$distbegin+0.5) 
+  
+  data <- data[,!(colnames(data)== "distance")]
+  
+  tablesList <- list(region.table, sample.table, obs.table, data)
+  return(tablesList)
+}
+
+
+
+  

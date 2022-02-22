@@ -20,44 +20,45 @@ library(Distance)
 #           all methods            #
 #                                  #
 ####################################
-Cw <- 0.4831
-Cm <- 0.5805
+
+#stackhousia
 effort <- 300
 E  <-  nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m)
-l <- 2
-w <- 2
-target <- "Stackhousia"
-method <- "LTS"
-
-data <- mySmonoLTS
-details <- mySmonoLTS_details
 
 test <- resampleLTStheory(details = mySmonoLTS_details, data = mySmonoLTS,
-                          effort = 300, times = times, 
+                          effort = effort, times = times, 
                           method = "LTS", target = "Stackhousia", w =2,
                           E = nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m), 
-                          Cm = 0.5805, Cw = 0.4813, l = 2)
+                          Cm = Cm_Smono, Cw = Cw_Smono, l = 2)
 
 test2 <- resampleLTSfield(details = mySmonoLTS_details, data = mySmonoLTS,
-                          effort = 300, times = times, 
+                          effort = effort, times = times, 
                           method = "LTS", target = "Stackhousia", w =2)
 
 test3 <- resampleOptTheory(details = mySmonoLTS_details, data = mySmonoLTS, 
-                           effort = 300, times = times, 
+                           effort = effort, times = times, 
                            method = "Opt", target = "Stackhousia", 
                            E = nrow(mySmonoLTS)/sum(mySmonoLTS_details$length_m), 
                            Cm = 0.5805, Cw = 0.4813, l = 2, w = 2)
 
 test4 <- resampleOptField(details = mySmonoLTS_details, data = mySmonoLTS, 
-                          effort = 300, times = times, 
+                          effort = effort, times = times, 
                           method = "Opt", target = "Stackhousia",  
                           Cm = 0.5805, Cw = 0.4813, w = 2)
 
-test5 <- resampleLTStheory(details = mySquadLTS_details, data = mySquadLTS,
-                           effort = 300, times = times, 
+test5 <- resampleGrouped(details = mySmonoLTS_details, data = mySmonoLTS,
+                         effort = effort, times = times, 
+                         method = "Grouped", target = "Stackhousia", w =2)
+
+# Senecio
+
+budget <- 500
+
+trial <- resampleLTStheory(details = mySquadLTS_details, data = mySquadLTS,
+                           effort = budget, times = times, 
                            method = "LTS", target = "Senecio", w =10,
                            E = nrow(mySquadLTS)/sum(mySquadLTS_details$length_m), 
-                           Cm = 0.5805, Cw = 0.4813, l = 2)
+                           Cm = Cm_Squad, Cw = Cw_Squad, l = 20)
 
 
 
