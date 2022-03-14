@@ -51,10 +51,11 @@ myPlotSummary[3, 3:10] <- plotSummaryFunc(dfname = mySquadPlots)
 
 #times taken; set-up (incl. travel), sample
 #TIMES IN MINS
-times <- data.frame("target" = c(rep("Stackhousia", 5), rep("Senecio", 3)), 
-                    "method" = c("plot1m", "plot4m", "Opt", "LTS", "Grouped", "plot", "Opt", "LTS"), 
-                    "mean_unit_time" = numeric(8), "mean_survey_time" = numeric(8),
-                    "mean_other_time" = numeric(8), "n_complete_records" = numeric(8))
+times <- data.frame("target" = c(rep("Stackhousia", 6), rep("Senecio", 3)), 
+                    "method" = c("plot1m", "plot4m", "Opt", "LTS", 
+                                 "GroupedBands","GroupedNoBands",  "plot", "Opt", "LTS"), 
+                    "mean_unit_time" = numeric(9), "mean_survey_time" = numeric(9),
+                    "mean_other_time" = numeric(9), "n_complete_records" = numeric(9))
 
 #mean unit time is the mean total time to sample one unit (a plot or a transect), including travel, setup and sampling time
 #mean survey time is the mean time taken to complete the data collection (survey) of one sampling unit, NOT INCLUDING travel and set up time
@@ -75,13 +76,48 @@ times[times$target == "Stackhousia" & times$method == "plot1m", "mean_unit_time"
 times[times$target == "Stackhousia" & times$method == "plot4m", "mean_unit_time"] <- round(SmonoPlots_unitTime - (0.4*(as.numeric(sum(mySmono1m$setUpTime))/nrow(mySmono1m))/60) - (as.numeric(sum(mySmono1m$timeSearch_m))/nrow(mySmono1m)/60),2)
 times[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m", "mean_other_time"] <- round(times$mean_unit_time[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m"] - times$mean_survey_time[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m"],2)
 
-#Distance Surveys:
+#Distance Surveys:row indexed by number (may change, check before running final analyses)
 
-times[3, 3:6] <- timesDistFunc(x = mySmonoOpt_details)
-times[4, 3:6] <- timesDistFunc(x = mySmonoLTS_details)
-times[5, 3:6] <- timesDistFunc(x = mySmonoGrouped_details)
-times[7, 3:6] <- timesDistFunc(x = mySquadOpt_details)
-times[8, 3:6] <- timesDistFunc(x = mySquadLTS_details)
+times[3, c(3, 6)] <- timesDistFunc(x = mySmonoOpt_details)[c(1, 4)]
+times[4, c(3, 6)] <- timesDistFunc(x = mySmonoLTS_details)[c(1, 4)]
+#stackhousia measure times need to be adjusted (see notes in tidyData.R)
+#using timeMeasAdjust column in details.  Unit time already adjusted in tidyData.R
+#here survey and measure times need to be adjusted for the times df
+#column 2 is survey time (both details have no NAs in survey time column)
+times[3, 4] <- round(as.numeric(sum(mySmonoOpt_details$surveyTime) + sum(mySmonoOpt_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoOpt_details)/60, 2)
+times[4, 4] <- round(as.numeric(sum(mySmonoLTS_details$surveyTime) + sum(mySmonoLTS_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoLTS_details)/60, 2)
 
+#column 3 is other time
+times[c(3, 4), 5] <- times$mean_unit_time[c(3, 4)] - times$mean_survey_time[c(3, 4)]
 
-rm(SmonoPlots_unitTime)
+times[8, 3:6] <- timesDistFunc(x = mySquadOpt_details)
+times[9, 3:6] <- timesDistFunc(x = mySquadLTS_details)
+
+#for grouped surveys adjustments need to be made to account for band set up
+# vs no band set up time
+
+#unit times
+banded <- mySmonoGrouped_details[!(mySmonoGrouped_details$transectID %in% timeNoBands) & 
+                                   mySmonoGrouped_details$transectID != dntUseTime, ]
+times[times$method == "GroupedBands", "mean_unit_time"] <- round(as.numeric(sum(banded$unitTime)/nrow(banded))/60, 2)
+times[times$method == "GroupedBands", "mean_survey_time"] <- round(as.numeric(sum(mySmonoGrouped_details$surveyTime, na.rm = TRUE)/nrow(mySmonoGrouped_details)/60), 2)
+times[times$method == "GroupedBands", "mean_other_time"] <- times$mean_unit_time[times$method == "GroupedBands"] -
+                                                                 times$mean_survey_time[times$method == "GroupedBands"] 
+times[times$method == "GroupedBands", "n_complete_records"] <-   
+                                            nrow(banded[!is.na(banded$travelStartTime) & 
+                                            !is.na(banded$finishTime) & 
+                                            !is.na(banded$surveyTime)  &
+                                            !is.na(banded$timeMeasuring), ])
+notBanded <- mySmonoGrouped_details[mySmonoGrouped_details$transectID %in% timeNoBands &
+                                      mySmonoGrouped_details$transectID != dntUseTime, ]
+times[times$method == "GroupedNoBands", "mean_unit_time"] <- round(as.numeric(sum(notBanded$unitTime)/nrow(notBanded))/60, 2)
+times[times$method == "GroupedNoBands", "mean_survey_time"] <- round(as.numeric(sum(mySmonoGrouped_details$surveyTime, na.rm = TRUE)/nrow(mySmonoGrouped_details)/60), 2)
+times[times$method == "GroupedNoBands", "mean_other_time"] <- times$mean_unit_time[times$method == "GroupedNoBands"] -
+                                                                  times$mean_survey_time[times$method == "GroupedNoBands"] 
+times[times$method == "GroupedNoBands", "n_complete_records"] <-   
+                                            nrow(notBanded[!is.na(notBanded$travelStartTime) & 
+                                            !is.na(notBanded$finishTime) & 
+                                            !is.na(notBanded$surveyTime)  &
+                                            !is.na(notBanded$timeMeasuring), ])
+
+rm(SmonoPlots_unitTime, banded, notBanded)

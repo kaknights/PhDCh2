@@ -2,17 +2,15 @@
 # for surveys of high density species: a wildflower case study
 
 source("scripts/summaries.R")
-source("scripts/optVars_pilot.R")
-source("scripts/resampleFunction.R")
+#source("scripts/resampleFunction.R")
+source("scripts/resampleDistFunc.R")
 
 library(Distance)
-
 
 ######################
 
 #note, maybe remove 23964 from analysis (3 obs, NA on measuring time, 2 sticks were missed)
 #search density equivalent effort? 
-
 
 ####################################
 #                                  #
@@ -20,6 +18,84 @@ library(Distance)
 #           all methods            #
 #                                  #
 ####################################
+
+start1 <- Sys.time()#2.38
+try1 <- resampleMany(n = 100, details = mySmonoLTS_details, 
+                     data = mySmonoLTS, effort = 300, times = times, 
+                     target = "Stackhousia", Cm = Cm_Smono, 
+                     Cw = Cw_Smono, w = 2)
+end1 <- Sys.time()
+
+start3 <- Sys.time()
+try3 <- resampleMany(n = 100, details = mySquadLTS_details, 
+                     data = mySquadLTS, effort = 360, times = times, 
+                     target = "Senecio", Cm = Cm_Squad, 
+                     Cw = Cw_Squad, w = 10)
+end3 <- Sys.time()
+
+
+mySmonoDistResults <- data.frame("method" = rep(c("LTS", "Opt", "GrB", "GrN"), each = 100),
+                            "idx" = rep(c(1:100), times = 4),
+                            "estD" = numeric(400),
+                            "seD" = numeric(400),
+                            "cvD" = numeric(400))
+
+
+for(i in 1:100){
+  #results for LTS
+  mySmonoDistResults$estD[mySmonoDistResults$method == "LTS" & 
+                            mySmonoDistResults$idx == i] <- try1[[2]][[i]][[1]]$dht$individuals$D$Estimate
+  mySmonoDistResults$seD[mySmonoDistResults$method == "LTS" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[1]]$dht$individuals$D$se
+  mySmonoDistResults$cvD[mySmonoDistResults$method == "LTS" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[1]]$dht$individuals$D$cv
+  
+  #results for OPT
+  optCorrection <- nrow(try1[[1]][[i]][[2]][[4]])/length(try1[[1]][[i]][[2]][[5]])
+  mySmonoDistResults$estD[mySmonoDistResults$method == "Opt" &
+                            mySmonoDistResults$idx == i] <- try1[[2]][[i]][[2]]$dht$individuals$D$Estimate/optCorrection
+  mySmonoDistResults$seD[mySmonoDistResults$method == "Opt" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[2]]$dht$individuals$D$se/optCorrection
+  mySmonoDistResults$cvD[mySmonoDistResults$method == "Opt" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[2]]$dht$individuals$D$cv
+  
+  #results for grouped with bands
+  mySmonoDistResults$estD[mySmonoDistResults$method == "GrB" &
+                            mySmonoDistResults$idx == i] <- try1[[2]][[i]][[3]]$dht$individuals$D$Estimate
+  mySmonoDistResults$seD[mySmonoDistResults$method == "GrB" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[3]]$dht$individuals$D$se
+  mySmonoDistResults$cvD[mySmonoDistResults$method == "GrB" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[3]]$dht$individuals$D$cv
+  
+  #results for grouped without bands
+  mySmonoDistResults$estD[mySmonoDistResults$method == "GrN" &
+                            mySmonoDistResults$idx == i] <- try1[[2]][[i]][[4]]$dht$individuals$D$Estimate
+  mySmonoDistResults$seD[mySmonoDistResults$method == "GrN" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[4]]$dht$individuals$D$se
+  mySmonoDistResults$cvD[mySmonoDistResults$method == "GrN" &
+                           mySmonoDistResults$idx == i] <- try1[[2]][[i]][[4]]$dht$individuals$D$cv
+  
+  }
+
+plot(x = mySmonoDistResults$estD, y = mySmonoDistResults$seD, xlab = "D hat (indiv/m^2)", 
+     ylab = "se (D hat)", pch = c(15:18)[as.factor(mySmonoDistResults$method)],
+     col = c("red", "blue", "yellow", "black")[as.factor(mySmonoDistResults$method)], 
+     main = "Comparison of distance methods (se): Stackhousia monogyna")
+
+plot(x = mySmonoDistResults$estD, y = mySmonoDistResults$cvD, xlab = "D hat (indiv/m^2)", 
+     ylab = "cv (D hat)", pch = c(15:18)[as.factor(mySmonoDistResults$method)],
+     col = c("red", "blue", "yellow", "black")[as.factor(mySmonoDistResults$method)], 
+     main = "Comparison of distance methods (cv): Stackhousia monogyna")
+     
+plot(x = mySmonoDistResults$estD[mySmonoDistResults$method == "Opt"], 
+     y = mySmonoDistResults$seD[mySmonoDistResults$method == "Opt"], xlab = "D hat (indiv/m^2)", 
+     ylab = "se (D hat)", xlim = c(0,10), ylim = c(0,4))
+
+# plot se against estimate (for the 10 different values, use different symbols/colours for methods)
+as.factor(mySmonoDistResults$method) # order is GrB, GrN, LTS, Opt
+
+# do LTS Vs Opt Vs GrB as this analysis, try using cv also
+# then do GrN vs the winner (Opt)
 
 #stackhousia
 effort <- 300
@@ -52,6 +128,9 @@ test5 <- resampleGrouped(details = mySmonoLTS_details, data = mySmonoLTS,
 
 # Senecio
 
+totalTimeSquadLTS <- times$mean_unit_time[9]*7
+totalTimeSquadOpt <- times$mean_unit_time[8]*13
+
 budget <- 500
 
 trial <- resampleLTStheory(details = mySquadLTS_details, data = mySquadLTS,
@@ -60,7 +139,9 @@ trial <- resampleLTStheory(details = mySquadLTS_details, data = mySquadLTS,
                            E = nrow(mySquadLTS)/sum(mySquadLTS_details$length_m), 
                            Cm = Cm_Squad, Cw = Cw_Squad, l = 20)
 
-
+# things to go over in meeting:
+    # grouped no bands resampled with replacement - best solution?
+    # discrepancy between estimated and actual measuring times for LTS (opt not so bad)
 
 ####################################
 #                                  #

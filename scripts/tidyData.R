@@ -4,6 +4,7 @@
 library(readxl)
 library(hms)
 source("scripts/functions.R")
+source("scripts/optVars_pilot.R")
 set.seed(1)
 
 ##########################################
@@ -144,6 +145,7 @@ myDistDetails$unitTime[myDistDetails$transectID == 25873] <- as_hms(myDistDetail
 # ensure this comes before other adjustments so extrapolated times aren't used to estimate (base on recorded times) [2 and 3 above are ok]
 
 noNaUnits <- myDistDetails$transectID[myDistDetails$transectID %in% 1:15 & !is.na(myDistDetails$unitTime)]
+# all non-NA unit times in transects 1-15 also have set up and survey time
 
 travelandClearUp <- as_hms((sum(myDistDetails$unitTime[myDistDetails$transectID %in% noNaUnits], na.rm = TRUE)- 
                       sum(myDistDetails$setUpTime[myDistDetails$transectID %in% noNaUnits], na.rm = TRUE) - 
@@ -209,7 +211,6 @@ mySquadOpt_details <- myDistDetails[myDistDetails$target=="Senecio quadridentatu
 mySquadLTS_details <- myDistDetails[myDistDetails$target=="Senecio quadridentatus" & myDistDetails$method=="Standard"
                                     & myDistDetails$length_m==20 & !is.na(myDistDetails$length_m), ]
 
-
 #All data (one row per observation, transect details are repeated, excludes transects with zero obs), and remove NA rows:
 mySmonoOpt <- merge(x = mySmonoOpt_details[ , "transectID"], y = myDistData, by = "transectID")
 #add a unique ID column for each obs in the survey (all distance surveys except grouped)
@@ -218,6 +219,19 @@ mySmonoOpt$obsID <- 1:nrow(mySmonoOpt)
 ##########################################
 #              Correction                #
 ##########################################
+
+#grouped data survey vs measure time doesn't match other methods
+#survey time is always the total
+#move 'measure time' (time to mark individuals) to two other columns
+#one 'mark' and the other 'count'
+
+mySmonoGrouped_details$timeMark <- mySmonoGrouped_details$timeMeasuring
+mySmonoGrouped_details$timeCount <- ifelse(mySmonoGrouped_details$timeMeasuring > 0, 
+                                           as_hms(mySmonoGrouped_details$surveyTime - mySmonoGrouped_details$timeMark), hms(0, 0, 0))
+mySmonoGrouped_details$timeCount <- as_hms(mySmonoGrouped_details$timeCount)
+
+timeNoBands <- c(41386, 41391, 29696, 30961, 33827, 34140, 35413, 36364) #grouped surveys where bands were not set up 
+dntUseTime <- c(22400) # grouped surveys that should not be used in timings
 
 #randomly exclude every nth measurement on the transects that were surveyed using the wrong alpha
 #Just randomly delete one ninth of the measurements (adjust time calculated to account for fewer measurements). 
@@ -252,9 +266,6 @@ timeAdjustTable$timeAdjust <- timeAdjustTable$nObsExcluded*timeAdjustTable$timeP
 #adjust measuring time in details table:
 mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID] <- as_hms(mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID]-timeAdjustTable$timeAdjust)
 
-mySmonoOpt_details$finishTimeAdjust <- mySmonoOpt_details$finishTime
-mySmonoOpt_details$finishTimeAdjust[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID] <- 
-  as_hms(mySmonoOpt_details$finishTimeAdjust[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID]-timeAdjustTable$timeAdjust)
 ###### TOTAL TIME FOR THESE TRANSECTS IS ADJUSTED IN THE 'timesDistFunc' function ####
 # but the timesDistFunc function calculates the mean and creates a new df, 
 # data in original data df remains unadjusted
@@ -293,6 +304,60 @@ mySmonoOpt_details <- mySmonoOpt_details[!(mySmonoOpt_details$transectID==29698 
 mySmonoLTS <- mySmonoLTS[!(mySmonoLTS$transectID==37973 & mySmonoLTS$date=="2021-10-31"), ]
 
 ##########################################
+# LTS (and opt) measure time needs adjusting for Stackhousia surveys
+# measure time recorded in raw data is one person measuring, the other writing
+# leave measure time and survey time as raw data, 
+# adjust unit time to account for longer time measuring (it's a calculated var), 
+# use Cm from pilot and n measurements to estimate time to add
+# measure and survey time will be adjusted in the 'times' df on 'summaries.R'
+
+# transect IDs that need adjusting
+LTSadjust <- mySmonoLTS_details$transectID[mySmonoLTS_details$timeMeasuring>0 &
+                                             !is.na(mySmonoLTS_details$timeMeasuring)]
+# n observations on each of those transects
+nObsLTS <- aggregate(mySmonoLTS$obsID[mySmonoLTS$transectID %in% LTSadjust], 
+                     by = list(mySmonoLTS$transectID[mySmonoLTS$transectID %in% LTSadjust]), 
+                     FUN = length)
+# estimate measure time using Cm from pilot data
+nObsLTS$estMeasure <- Cm_Smono*nObsLTS$x
+nObsLTS$estWalk <- Cw_Smono*nObsLTS$x
+checkDifference <- cbind(nObsLTS, 
+                  "actualMeasure" = as.numeric(mySmonoLTS_details$timeMeasuring[mySmonoLTS_details$transectID %in% LTSadjust])/60,
+                  "actualWalk" = as.numeric(mySmonoLTS_details$surveyTime[mySmonoLTS_details$transectID %in% LTSadjust]-
+                               mySmonoLTS_details$timeMeasuring[mySmonoLTS_details$transectID %in% LTSadjust])/60)
+#actual and estimated times are very different - but Cm (from pilot) seems reasonable so we'll go with it
+
+#adjust amount is in seconds, (est vs actual) times above are in minutes for easier interpretation
+checkDifference$adjustAmountSecs <- round((checkDifference$estMeasure - checkDifference$actualMeasure)*60)
+mySmonoLTS_details$timeMeasAdjust <- NA
+mySmonoLTS_details$timeMeasAdjust[mySmonoLTS_details$transectID %in% LTSadjust] <- checkDifference$adjustAmountSecs
+
+mySmonoLTS_details$unitTime[mySmonoLTS_details$transectID %in% LTSadjust] <- 
+  as_hms(mySmonoLTS_details$unitTime[mySmonoLTS_details$transectID %in% LTSadjust] + 
+  mySmonoLTS_details$timeMeasAdjust[mySmonoLTS_details$transectID %in% LTSadjust])
+
+# Same process for opt data
+Optadjust <- mySmonoOpt_details$transectID[mySmonoOpt_details$timeMeasuring>0 &
+                                             !is.na(mySmonoOpt_details$timeMeasuring)]
+nObsOpt <- aggregate(mySmonoOpt$obsID[mySmonoOpt$transectID %in% Optadjust & 
+                                        !is.na(mySmonoOpt$perpDist_m)], 
+                     by = list(mySmonoOpt$transectID[mySmonoOpt$transectID %in% Optadjust& 
+                                                       !is.na(mySmonoOpt$perpDist_m)]), 
+                     FUN = length) #using only measured obs
+nObsOpt$estMeasure <- Cm_Smono*nObsOpt$x
+nObsOpt$estWalk <- Cw_Smono*nObsOpt$x
+checkDiffOpt <- cbind(nObsOpt, 
+                         "actualMeasure" = as.numeric(mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% Optadjust])/60,
+                         "actualWalk" = as.numeric(mySmonoOpt_details$surveyTime[mySmonoOpt_details$transectID %in% Optadjust]-
+                                                     mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% Optadjust])/60)
+checkDiffOpt$adjustAmountSecs <- round((checkDiffOpt$estMeasure - checkDiffOpt$actualMeasure)*60)
+mySmonoOpt_details$timeMeasAdjust <- NA
+mySmonoOpt_details$timeMeasAdjust[mySmonoOpt_details$transectID %in% Optadjust] <- checkDiffOpt$adjustAmountSecs
+
+mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% Optadjust] <- 
+  as_hms(mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% Optadjust] + 
+           mySmonoOpt_details$timeMeasAdjust[mySmonoOpt_details$transectID %in% Optadjust])
+
 #check all the observations are paired with a transect on the details list
 allRecords <- merge(myDistDetails, myDistData, by = "transectID", all = TRUE)
 obsOnly <- allRecords[is.na(allRecords$date.x) & allRecords$method!="Ignore", ]
@@ -303,5 +368,7 @@ obsOnly <- allRecords[is.na(allRecords$date.x) & allRecords$method!="Ignore", ]
 rm(mySubset, check, datesSelect, exclude, remove, drops, recsExcluded, 
    obsPerTransect, measTime, meanMeasureTime50882,endTime, noNaUnits, 
    start2end3, start30961end29696, travelandClearUp, allRecords, obsOnly,
-   propMeasured, propMeasured_adjust)
+   propMeasured, propMeasured_adjust, LTSadjust, nObsLTS)
 
+############### Write notes here to print to console:
+############### What has been adjusted

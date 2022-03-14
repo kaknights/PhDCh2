@@ -85,16 +85,8 @@ timesPlotFunction <- function(df){
 #function to calculate columns 3 to 6 in times summary table for distance surveys
 #x is the dataframe to be summarised
 timesDistFunc <- function(x, timeAdjustTable){
-  if(x$method[1] == "Opt" & x$target[1] == "Stackhousia monogyna"){
-    unitTime <- as.numeric(sum(x$finishTimeAdjust[!is.na(x$travelStartTime) & !is.na(x$finishTimeAdjust)] 
-                               - x$travelStartTime[!is.na(x$travelStartTime) & !is.na(x$finishTimeAdjust)]))/
-      nrow(x[!is.na(x$travelStartTime) & !is.na(x$finishTimeAdjust), ])/60
-  print("unit Time for Opt transects on 25 and 26/10/2021 have been adjusted")
-  } else {
-    unitTime <- as.numeric(sum(x$finishTime[!is.na(x$travelStartTime) & !is.na(x$finishTime)] 
-                               - x$travelStartTime[!is.na(x$travelStartTime) & !is.na(x$finishTime)]))/
-      nrow(x[!is.na(x$travelStartTime) & !is.na(x$finishTime), ])/60
-  }  
+  
+  unitTime <- as.numeric(sum(x$unitTime[!is.na(x$unitTime)])) / nrow(x[!is.na(x$unitTime), ])/60
   surveyTime <- as.numeric(sum(x$surveyTime, na.rm = TRUE))/length(x$surveyTime[!is.na(x$surveyTime)])/60
   otherTime <- unitTime-surveyTime
   complete <-   nrow(x[!is.na(x$travelStartTime) & !is.na(x$finishTime) & !is.na(x$surveyTime)  &!is.na(x$timeMeasuring), ])
@@ -103,50 +95,8 @@ timesDistFunc <- function(x, timeAdjustTable){
   return(results)
 }
 
-#function to make Distance tables (using identically formatted distance survey data):
-distTables <- function(distDetails, distData, w){
-  region.table <- data.frame("Region.Label" = "EvansSt", "Area" = 
-                               sum(distDetails$length_m)* (2*w))
-  sample.table <- data.frame("Sample.Label" = distDetails$transectID,
-                             "Region.Label" = "EvansSt",
-                             "Effort" = distDetails$length_m)
-  obs.table <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
-                          "Region.Label" = "EvansSt",
-                          "Sample.Label" = distData$transectID[!is.na(distData$perpDist_m)])
-  data <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
-                     "distance" = distData$perpDist_m[!is.na(distData$perpDist_m)])
-  tablesList <- list(region.table, sample.table, obs.table, data)
-  return(tablesList)
-}
 
-#function to produce distance tables using LTS data as input, getting grouped
-#as output
-#replace single 'perpDist_m' column with two columns, distbegin and distend
-distTablesGrouped <- function(distDetails, distData, w){
-  region.table <- data.frame("Region.Label" = "EvansSt", "Area" = 
-                               sum(distDetails$length_m)* (2*w))
-  sample.table <- data.frame("Sample.Label" = distDetails$transectID,
-                             "Region.Label" = "EvansSt",
-                             "Effort" = distDetails$length_m)
-  obs.table <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
-                          "Region.Label" = "EvansSt",
-                          "Sample.Label" = distData$transectID[!is.na(distData$perpDist_m)])
-  data <- data.frame("object" = distData$obsID[!is.na(distData$perpDist_m)],
-                     "distance" = distData$perpDist_m[!is.na(distData$perpDist_m)])
-  data$distbegin <- ifelse(data$distance <= 0.25, 0, 
-                           ifelse(data$distance> 0.25 & data$distance <= 0.5, 0.25,
-                                  ifelse(data$distance> 0.5 & data$distance <= 1, 0.5, 
-                                         ifelse(data$distance >1 & data$distance <= 1.5, 1,
-                                                1.5)))) 
 
-  data$distend <- ifelse(data$distbegin == 0 | data$distbegin == 0.25, data$distbegin+0.25,
-                         data$distbegin+0.5) 
-  
-  data <- data[,!(colnames(data)== "distance")]
-  
-  tablesList <- list(region.table, sample.table, obs.table, data)
-  return(tablesList)
-}
 
 
 

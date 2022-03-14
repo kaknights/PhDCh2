@@ -37,21 +37,7 @@ resampleLTStheory <- function(details, data, effort, times,
 
 # resample using LTS method - n transects calculated using full survey mean unit time
 
-resampleLTSfield <- function(details, data, effort, times, 
-                                method, target, w){
-  t <- times$mean_unit_time[times$target == target & times$method == method]
-  K <- round(effort/t)
-  samp <- sample(details$transectID, K)
-  mydetails <- details[details$transectID %in% samp, ]
-  mydata <- data[data$transectID %in% mydetails$transectID, ]
-  myDistTables <- distTables(distDetails = mydetails,
-                             distData = mydata,
-                             w = w)
-  myDistTables[[5]] <- mydetails
-  myDistTables[[6]] <- mydata
-  return(myDistTables)
-}
-
+#redesigned to create all method dist tables from same data
 
 # resample LTS data using Opt method - n transects calculated using distance theory and
 # pilot data for costs of measuring and walking per detection
@@ -110,6 +96,16 @@ resampleGrouped <- function(details, data, effort, times,
   return(myDistTables)
 }
 
-resamplePlots <- function(x){
+resamplePlots <- function(effort, plotData, target, method){
+  t <- times$mean_unit_time[times$target == target & times$method == method]
+  nPlots <- round(effort/t)
+  #need to sample equal numbers of P1 and P2
+  samp1 <- sample(plotData$plotID[!is.na(plotData$kkPrimaryCount)], round(nPlots/2))
+  samp2 <- sample(plotData$plotID[!is.na(plotData$SecObsPrimaryCount)], round(nPlots/2))
+  mydata <- plotData[plotData$plotID %in% samp1 | plotData$plotID %in% samp2, ]
   
+  #need to modify plot Summary function and q function to work with zeros
+  things <- plotSummaryFunc(mydata)
 }
+
+
