@@ -76,31 +76,56 @@ times[times$target == "Stackhousia" & times$method == "plot1m", "mean_unit_time"
 times[times$target == "Stackhousia" & times$method == "plot4m", "mean_unit_time"] <- round(SmonoPlots_unitTime - (0.4*(as.numeric(sum(mySmono1m$setUpTime))/nrow(mySmono1m))/60) - (as.numeric(sum(mySmono1m$timeSearch_m))/nrow(mySmono1m)/60),2)
 times[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m", "mean_other_time"] <- round(times$mean_unit_time[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m"] - times$mean_survey_time[times$target == "Stackhousia" & times$method == "plot1m" | times$method == "plot4m"],2)
 
-#Distance Surveys:row indexed by number (may change, check before running final analyses)
+#Distance Surveys: unit time and n complete records
+#effort correct (n units total vs n units used in the calculations)
+smonoOptUnitCorrect <- nrow(mySmonoOpt_details[!is.na(mySmonoOpt_details$unitTime), ])/nrow(mySmonoOpt_details)
+smonoLTSUnitCorrect <- nrow(mySmonoLTS_details[!is.na(mySmonoLTS_details$unitTime), ])/nrow(mySmonoLTS_details)
+#Note - LTS ratio =1, but am putting it in the code anyway, if further fixes change the ratio this is already done.
 
-times[3, c(3, 6)] <- timesDistFunc(x = mySmonoOpt_details)[c(1, 4)]
-times[4, c(3, 6)] <- timesDistFunc(x = mySmonoLTS_details)[c(1, 4)]
-#stackhousia measure times need to be adjusted (see notes in tidyData.R)
+times[times$target == "Stackhousia" & times$method == "Opt", "mean_unit_time"] <- round(as.numeric(sum(mySmonoOpt_details$unitTime[!is.na(mySmonoOpt_details$unitTime)])+(addTimeOpt*smonoOptUnitCorrect)) / nrow(mySmonoOpt_details[!is.na(mySmonoOpt_details$unitTime), ])/60, 2)
+times[times$target == "Stackhousia" & times$method == "Opt", "n_complete_records"] <- nrow(mySmonoOpt_details[!is.na(mySmonoOpt_details$travelStartTime) & !is.na(mySmonoOpt_details$finishTime) & !is.na(mySmonoOpt_details$surveyTime)  &!is.na(mySmonoOpt_details$timeMeasuring), ])
+times[times$target == "Stackhousia" & times$method == "LTS", "mean_unit_time"] <- round(as.numeric(sum(mySmonoLTS_details$unitTime[!is.na(mySmonoLTS_details$unitTime)])+(addTime*smonoLTSUnitCorrect)) / nrow(mySmonoLTS_details[!is.na(mySmonoLTS_details$unitTime), ])/60, 2)
+times[times$target == "Stackhousia" & times$method == "LTS", "n_complete_records"] <-  nrow(mySmonoLTS_details[!is.na(mySmonoLTS_details$travelStartTime) & !is.na(mySmonoLTS_details$finishTime) & !is.na(mySmonoLTS_details$surveyTime)  &!is.na(mySmonoLTS_details$timeMeasuring), ])
+
+#stackhousia survey/measure times need to be adjusted (see notes in tidyData.R)
 #using timeMeasAdjust column in details.  Unit time already adjusted in tidyData.R
-#here survey and measure times need to be adjusted for the times df
-#column 2 is survey time (both details have no NAs in survey time column)
-times[3, 4] <- round(as.numeric(sum(mySmonoOpt_details$surveyTime) + sum(mySmonoOpt_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoOpt_details)/60, 2)
-times[4, 4] <- round(as.numeric(sum(mySmonoLTS_details$surveyTime) + sum(mySmonoLTS_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoLTS_details)/60, 2)
 
-#column 3 is other time
+#column 4 is survey time (both details have no NAs in survey time column)
+times[times$target == "Stackhousia" & times$method == "Opt", 4] <- round(as.numeric(sum(mySmonoOpt_details$surveyTime) + sum(mySmonoOpt_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoOpt_details)/60, 2)
+times[times$target == "Stackhousia" & times$method == "LTS", 4] <- round(as.numeric(sum(mySmonoLTS_details$surveyTime) + sum(mySmonoLTS_details$timeMeasAdjust, na.rm = TRUE))/nrow(mySmonoLTS_details)/60, 2)
+
+#column 5 is other time ('add time' is already added in to unit time, so is accounted for)
 times[c(3, 4), 5] <- times$mean_unit_time[c(3, 4)] - times$mean_survey_time[c(3, 4)]
 
-times[8, 3:6] <- timesDistFunc(x = mySquadOpt_details)
-times[9, 3:6] <- timesDistFunc(x = mySquadLTS_details)
+#S quad 
+#effort correct (n units total vs n units used in the calculations)
+squadOptUnitCorrect <- nrow(mySquadOpt_details[!is.na(mySquadOpt_details$unitTime), ])/nrow(mySquadOpt_details)
+squadLTSUnitCorrect <- nrow(mySquadLTS_details[!is.na(mySquadLTS_details$unitTime), ])/nrow(mySquadLTS_details)
+#both ratios are 1.  No issues with n complete units in time columns (opt has missing finish times, but these have been accounted for)
+
+times[times$target == "Senecio" & times$method == "Opt", "mean_unit_time"] <- round(as.numeric(sum(mySquadOpt_details$unitTime[!is.na(mySquadOpt_details$unitTime)])+SquadAddTimeOpt) / nrow(mySquadOpt_details[!is.na(mySquadOpt_details$unitTime), ])/60, 2)
+times[times$target == "Senecio" & times$method == "Opt", "mean_survey_time"] <- round(as.numeric(sum(mySquadOpt_details$surveyTime, na.rm = TRUE))/length(mySquadOpt_details$surveyTime[!is.na(mySquadOpt_details$surveyTime)])/60,2)
+times[times$target == "Senecio" & times$method == "Opt", "mean_other_time"] <- times$mean_unit_time[times$target == "Senecio" & times$method == "Opt"]-times$mean_survey_time[times$target == "Senecio" & times$method == "Opt"]
+times[times$target == "Senecio" & times$method == "Opt", "n_complete_records"] <- nrow(mySquadOpt_details[!is.na(mySquadOpt_details$travelStartTime) & !is.na(mySquadOpt_details$finishTime) & !is.na(mySquadOpt_details$surveyTime)  &!is.na(mySquadOpt_details$timeMeasuring), ])
+
+times[times$target == "Senecio" & times$method == "LTS", "mean_unit_time"] <- round(as.numeric(sum(mySquadLTS_details$unitTime[!is.na(mySquadLTS_details$unitTime)])+SquadAddTimeLTS) / nrow(mySquadLTS_details[!is.na(mySquadLTS_details$unitTime), ])/60, 2)
+times[times$target == "Senecio" & times$method == "LTS", "mean_survey_time"] <- round(as.numeric(sum(mySquadLTS_details$surveyTime, na.rm = TRUE))/length(mySquadLTS_details$surveyTime[!is.na(mySquadLTS_details$surveyTime)])/60,2)
+times[times$target == "Senecio" & times$method == "LTS", "mean_other_time"] <- times$mean_unit_time[times$target == "Senecio" & times$method == "LTS"]-times$mean_survey_time[times$target == "Senecio" & times$method == "LTS"]
+times[times$target == "Senecio" & times$method == "LTS", "n_complete_records"] <- nrow(mySquadLTS_details[!is.na(mySquadLTS_details$travelStartTime) & !is.na(mySquadLTS_details$finishTime) & !is.na(mySquadLTS_details$surveyTime)  &!is.na(mySquadLTS_details$timeMeasuring), ])
 
 #for grouped surveys adjustments need to be made to account for band set up
 # vs no band set up time
 
+# uses objects created in tidyData.R
 #unit times
+#unit corrections (n units total vs n units used in calculations)
 banded <- mySmonoGrouped_details[!(mySmonoGrouped_details$transectID %in% timeNoBands) & 
                                    mySmonoGrouped_details$transectID != dntUseTime, ]
-times[times$method == "GroupedBands", "mean_unit_time"] <- round(as.numeric(sum(banded$unitTime)/nrow(banded))/60, 2)
+bandedUnitCorrect <- nrow(banded)/nrow(mySmonoGrouped_details)
+
+times[times$method == "GroupedBands", "mean_unit_time"] <- round(as.numeric((sum(banded$unitTime)+ (addTimeGrouped*bandedUnitCorrect))/nrow(banded))/60, 2)
 times[times$method == "GroupedBands", "mean_survey_time"] <- round(as.numeric(sum(mySmonoGrouped_details$surveyTime, na.rm = TRUE)/nrow(mySmonoGrouped_details)/60), 2)
+#note - there are no NAs in survey time, but for unknown reasons this didn't run without na.rm = TRUE
 times[times$method == "GroupedBands", "mean_other_time"] <- times$mean_unit_time[times$method == "GroupedBands"] -
                                                                  times$mean_survey_time[times$method == "GroupedBands"] 
 times[times$method == "GroupedBands", "n_complete_records"] <-   
@@ -110,8 +135,11 @@ times[times$method == "GroupedBands", "n_complete_records"] <-
                                             !is.na(banded$timeMeasuring), ])
 notBanded <- mySmonoGrouped_details[mySmonoGrouped_details$transectID %in% timeNoBands &
                                       mySmonoGrouped_details$transectID != dntUseTime, ]
-times[times$method == "GroupedNoBands", "mean_unit_time"] <- round(as.numeric(sum(notBanded$unitTime)/nrow(notBanded))/60, 2)
+notbandedUnitCorrect <- nrow(notBanded)/nrow(mySmonoGrouped_details)
+
+times[times$method == "GroupedNoBands", "mean_unit_time"] <- round(as.numeric((sum(notBanded$unitTime)+(addTimeGrouped*notbandedUnitCorrect))/nrow(notBanded))/60, 2)
 times[times$method == "GroupedNoBands", "mean_survey_time"] <- round(as.numeric(sum(mySmonoGrouped_details$surveyTime, na.rm = TRUE)/nrow(mySmonoGrouped_details)/60), 2)
+#note - there are no NAs in survey time, but for unknown reasons this didn't run without na.rm = TRUE
 times[times$method == "GroupedNoBands", "mean_other_time"] <- times$mean_unit_time[times$method == "GroupedNoBands"] -
                                                                   times$mean_survey_time[times$method == "GroupedNoBands"] 
 times[times$method == "GroupedNoBands", "n_complete_records"] <-   
@@ -120,4 +148,13 @@ times[times$method == "GroupedNoBands", "n_complete_records"] <-
                                             !is.na(notBanded$surveyTime)  &
                                             !is.na(notBanded$timeMeasuring), ])
 
-rm(SmonoPlots_unitTime, banded, notBanded)
+#add a column for total effort
+times$totalEffort <- times$mean_unit_time*times$n_complete_records
+times$totalEffort[3] <- times$mean_unit_time[3]*40
+times$totalEffort[4] <- times$mean_unit_time[4]*32
+times$totalEffort[5] <- times$mean_unit_time[5]*23
+times$totalEffort[7] <- times$mean_unit_time[7]*46
+times$totalEffort[8] <- times$mean_unit_time[8]*13
+
+rm(SmonoPlots_unitTime, banded, notBanded, addTime, addTimeGrouped, addTimeOpt, SquadAddTimeLTS, SquadAddTimeOpt, bandedUnitCorrect, notbandedUnitCorrect,
+   smonoLTSUnitCorrect, smonoOptUnitCorrect, squadLTSUnitCorrect, squadOptUnitCorrect)
