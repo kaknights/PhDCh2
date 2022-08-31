@@ -42,8 +42,6 @@ plot(x = Plotresults1m$dhat_doubleObs, y = Plotresults1m$cv.d.double., pch = 1,
 
 #script (in markdown or source in markdown?) to run the plots
 
-# things to go over in meeting:
-# grouped no bands resampled with replacement - best solution?
 # discrepancy between estimated and actual measuring times for LTS (opt not so bad)
 
 # ISSUE 4 ----
@@ -213,3 +211,8 @@ KLTS <- tOpt/times$mean_unit_time[times$method=="LTS" & times$target=="Senecio"]
 
 #need to look this up and find out what it mean, the function is still giving results, so this might be missed.
 #I think this means that the half-normal key function model fit the data, but the next one that was tried (in this case hn + cosine(2)) didn't fit, so it ditched the attempt and went back to half-normal.  So the half-normal was the best fit, the results stand.
+
+#ISSUE 6 ----
+#moving on to the unbanded analysis, not problems exactly but things to be discussed:
+  # When distance models are fitting, there is some info in the printed messages that may get lost - this is things like the 'Error in model fitting, returning: half-normal key function' message.  This still gives results and a fitted model, so from the summary it isn't clear which rounds of resamples are affected.  Other message on the same output is 'Error: Error in detfct.fit.opt(ddfobj, optim.options, bounds, misc.options) : No convergence.'  These are most likely when there is a small n1 (or nt for other methods, not relevant here as the unbanded grouped sample is quite large, other methods are not used in this analysis)
+  # When there are no obs in the resample, the row in the summary table says 'NA'; when there is a row of 0 values in the estimates, this probably means there were very few obs; the 'error' messages don't correspond to either of these, it looks like they are very high estimates, so maybe they contain a particular set of transects that make the model hard to fit??  e.g. where the obs were all far away?

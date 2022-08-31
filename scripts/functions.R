@@ -259,5 +259,5 @@ resamplePlots_replacement <- function(plotDf, timesDF, budget, plotType){
 # Test info ----
 # plotDf <- mySquadPlots
 # timesDF <- times
-# budget <- 275
+# budget <- 360
 # plotType <- "plot"
