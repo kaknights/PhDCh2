@@ -1,0 +1,13 @@
+"date" "site" "transectID" "target" "method" "travelStartTime" "setUpTime" "length_m" "surveyTime" "halfwayTime" "finishTime" "timeMeasuring" "halfwayMeasure" "southX" "southY" "observer" "recorder" "siteDescription" "notes" "unitTime" "timeMeasAdjust"
+"1" 2021-10-31 "Est" 24891 "Stackhousia monogyna" "Standard" 12:11:00 00:02:00 2 00:00:17 NA 12:15:00 00:00:00 NA NA NA "KK" "KK" "dianella patch, gravelly" NA 00:04:00 NA
+"2" 2021-10-31 "Est" 26788 "Stackhousia monogyna" "Standard" 12:16:00 00:01:00 2 00:00:26 NA 12:19:00 00:00:00 NA NA NA "KK" "KK" "lots of tufty, dry dead mass, kangaroo grass" "forgot that the point is the middle of the transect (measured out the transect a m off).  No S mono, eyeballed the 1st m." 00:03:00 NA
+"3" 2021-10-31 "Est" 28068 "Stackhousia monogyna" "Standard" 12:25:00 00:03:00 2 00:00:33 NA 12:29:00 00:00:00 NA NA NA "KK" "KK" "Dry bog patch - lots of dead mass, some short kangaroo grass and briza" NA 00:04:00 NA
+"4" 2021-10-31 "Est" 31867 "Stackhousia monogyna" "Standard" 12:31:00 00:02:00 2 00:00:39 NA 12:36:00 00:00:00 NA NA NA "KK" "KK" "short veg, daisies and pimelea, dry and gravelly" NA 00:05:00 NA
+"5" 2021-10-31 "Est" 34713 "Stackhousia monogyna" "Standard" 12:45:00 00:03:00 2 00:00:40 NA 12:51:00 00:00:00 NA NA NA "KK" "KK" "Short, sparse grass, daisy, some visible bare ground" NA 00:06:00 NA
+"6" 2021-10-31 "Est" 40119 "Stackhousia monogyna" "Standard" 11:06:00 00:02:00 2 00:00:18 NA 11:11:00 00:00:00 NA NA NA "KK" "KK" "short grass, lots of daisy" NA 00:05:00 NA
+"7" 2021-10-31 "Est" 43920 "Stackhousia monogyna" "Standard" 11:00:00 00:05:00 2 00:00:15 NA 11:06:00 00:00:00 NA NA NA "KK" "KK" "tiny rogue Acacia bush" NA 00:06:00 NA
+"8" 2021-10-31 "Est" 46153 "Stackhousia monogyna" "Standard" 10:49:00 00:03:00 2 00:00:14 NA 10:54:00 00:00:00 NA NA NA "KK" "KK" "long grass (fluffy species)" "not sure what the species is" 00:05:00 NA
+"9" 2021-10-31 "Est" 47419 "Stackhousia monogyna" "Standard" 10:40:00 00:02:00 2 00:00:15 NA 10:44:00 00:00:00 NA NA NA "KK" "KK" "long grass" NA 00:04:00 NA
+"10" 2021-11-02 "Est" 22070 "Stackhousia monogyna" "Standard" 14:00:00 00:03:00 2 00:00:13 NA 14:05:00 00:00:00 NA NA NA "KK" "KK" "shorter grass, lots of dead mass" NA 00:05:00 NA
+"11" 2021-11-02 "Est" 33510 "Stackhousia monogyna" "Standard" 12:19:00 00:02:00 2 00:00:25 NA 12:25:00 00:00:00 NA NA NA "KK" "KK" "short grass" NA 00:06:00 NA
+"12" 2021-11-02 "Est" 38266 "Stackhousia monogyna" "Standard" 12:27:00 00:01:00 2 00:00:17 NA 12:28:00 00:00:00 NA NA NA "KK" "KK" "lots of dead mass, shorter grass with whispy bits" NA 00:01:00 NA

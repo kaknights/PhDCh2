@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 7508 299090 5837854 "doubleObs" 13:14:00 00:04:00 4 00:01:40 0 NA NA 0 13:29:00 "lots of dead standing biomass, dry (not boggy)" "no notes" 00:15:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 10674 299128 5837792 "doubleObs" 14:53:00 00:04:00 4 00:00:58 NA 0 0 NA 15:06:00 "flat, short grass, near Acacia" "no notes" 00:13:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 7999 299096 5837862 "doubleObs" 16:22:00 00:03:00 4 00:00:44 0 NA NA 0 16:32:00 "thick grass not super long flat and dry" "no notes" 00:10:00
+"4" 2021-10-12 "Est" "Stackhousia monogyna" 9362 299112 5837776 "doubleObs" 10:44:00 00:05:00 4 00:50:43 233 NA NA 12 11:57:00 "dry, flat, mostly short grass, lots of dead/dry grass" "still v bright, most not yet flowering, had to keep counting sticks in a quadrant and gathering them up to use again" 01:13:00
+"5" 2021-10-12 "Est" "Stackhousia monogyna" 6216 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 9847 299118 5837796 "doubleObs" 14:28:00 00:05:00 4 00:01:33 NA 0 0 NA 14:40:00 "v close to Acacia, mix of green and dead grass, not long" "bright again" 00:12:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 6714 299080 5837792 "doubleObs" 14:56:00 00:04:00 4 00:13:33 80 NA NA 8 15:34:00 "?visitor interruption" "chatted to local lady" 00:38:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 8014 299096 5837832 "doubleObs" 16:16:00 00:04:00 4 00:02:05 0 NA NA 0 16:26:00 "dry, bit rocky, flat, the path daisy, mostly short tufty grass" "no notes" 00:10:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 7528 299090 5837814 "doubleObs" 16:41:00 00:03:30 4 00:13:28 67 NA NA 4 17:12:00 "thick mat of tufty grass, flat and dry." "no notes" 00:31:00

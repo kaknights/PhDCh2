@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 8204 299098 5837782 "doubleObs" 09:27:00 00:06:00 4 00:06:30 NA 3 16 NA 09:52:00 "thick kangaroo grass,but short. Flat" "most not flowering (1 was). Bit of chat (time)." 00:25:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 6519 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 9022 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 7375 299086 5837780 "doubleObs" 13:31:00 00:08:20 4 00:08:03 NA 6 96 NA 14:18:00 "plenty of dead grass but short, green, flat, dry" "set up time includes Linda getting a phone call, search time also unsure (may have pressed 'stop' by accident when putting clipboard up jumper when it started raining) in 4m^3" 00:47:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 8027 299096 5837806 "doubleObs" 16:04:00 00:05:00 4 00:01:14 NA 0 0 NA 16:17:00 "flat, short grass" "no notes" 00:13:00
+"6" 2021-10-11 "Est" "Stackhousia monogyna" 7999 299096 5837862 "doubleObs" 16:22:00 00:03:00 4 00:00:44 0 NA NA 0 16:32:00 "thick grass not super long flat and dry" "no notes" 00:10:00
+"7" 2021-10-11 "Est" "Stackhousia monogyna" 9359 299122 5837782 "doubleObs" 16:39:00 00:03:30 4 00:01:05 NA 0 0 NA 16:50:00 "short grass, flat, dry, little bare patch" "no notes" 00:11:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 9166 299110 5837838 "doubleObs" 10:31:00 00:04:00 4 00:00:55 NA 0 0 NA 10:41:00 "gravelly, flat, dry, short grass" "v bright" 00:10:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 12642 299152 5837816 "doubleObs" 13:41:00 00:04:00 4 00:00:55 0 NA NA 0 13:53:00 "long grass, quite green" "no notes" 00:12:00

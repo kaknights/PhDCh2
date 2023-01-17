@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 6219 299074 5837792 "doubleObs" 09:58:00 00:05:00 4 00:07:50 65 NA NA 3 10:40:00 "same (thick kangaroo grass, short, flat), bit more long stalks" "most flowering" 00:42:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 6519 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 7375 299086 5837780 "doubleObs" 13:31:00 00:08:20 4 00:08:03 NA 6 96 NA 14:18:00 "plenty of dead grass but short, green, flat, dry" "set up time includes Linda getting a phone call, search time also unsure (may have pressed 'stop' by accident when putting clipboard up jumper when it started raining) in 4m^3" 00:47:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 10674 299128 5837792 "doubleObs" 14:53:00 00:04:00 4 00:00:58 NA 0 0 NA 15:06:00 "flat, short grass, near Acacia" "no notes" 00:13:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 7506 299090 5837858 "doubleObs" 15:20:00 00:04:00 4 00:00:46 0 NA NA 0 15:32:00 "some type of oat, thick mat but sparser long grass" "no notes" 00:12:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 6216 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 11147 299134 5837836 "doubleObs" 14:15:00 00:05:00 4 00:01:15 0 NA NA 0 14:26:00 "Path, v short grass, orchids and path daisy" "no notes" 00:11:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 9847 299118 5837796 "doubleObs" 14:28:00 00:05:00 4 00:01:33 NA 0 0 NA 14:40:00 "v close to Acacia, mix of green and dead grass, not long" "bright again" 00:12:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 6714 299080 5837792 "doubleObs" 14:56:00 00:04:00 4 00:13:33 80 NA NA 8 15:34:00 "?visitor interruption" "chatted to local lady" 00:38:00

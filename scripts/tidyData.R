@@ -1,15 +1,17 @@
-#######################
-## Data Organisation ##
-#_____________________#
+#_______________________
+
+# Data Organisation ----
+#_______________________
 library(readxl)
 library(hms)
 source("scripts/functions.R")
 source("scripts/optVars_pilot.R")
 set.seed(1)
 
-##########################################
-#              Plot data                 #
-##########################################
+#_______________________
+
+# Plot/Quadrat Data ----
+#_______________________
 
 #read in data from excel files, format datetime as hms
 myPlots <- read_excel("Fieldwork/Evans St/dataRaw.xlsx", sheet = "EStplot_doubleObs", na = "NA")
@@ -36,9 +38,10 @@ mySmono4m <- myPlots[myPlots$target=="Stackhousia monogyna" & myPlots$area_m2==4
 
 mySquadPlots <- myPlots[myPlots$target=="Senecio quadridentatus" & myPlots$area_m2==12.25, ]
 
-##########################################
-#              Distance data             #
-##########################################
+#_______________________
+
+# Distance Data ----
+#_______________________
 
 #read in data from excel files, format date as date and datetime as hms
 
@@ -69,9 +72,11 @@ myDistDetails <- myDistDetails[ , !(names(myDistDetails) %in% remove)]
 #add a unit time column (same as above for plots)
 myDistDetails$unitTime <- as_hms(myDistDetails$finishTime-myDistDetails$travelStartTime)
 
-##########################################
-#              Corrections               #
-##########################################
+
+#__________________________________
+
+## Timing Corrections Distance ----
+#__________________________________
 
 #Adjusting times where field notes indicate the start/finish/measure/set up
 #were interrupted or otherwise don't reflect the accurate time taken
@@ -267,12 +272,14 @@ check$timeCompare <- as_hms(check$setUpTime+check$surveyTime)
 
 sepMeasTime <- c(37973, 36069, 29081, 23980, 23990, 26830, 26205)
 
-##########################################
-#          End of Corrections            #
-##########################################
+# END OF TIMING CORRECTIONS
 
-#separate by species and method (and remove pilot transects)
-#______________________________________________________
+#_____________________________________
+
+## separate by species and method ----
+#_____________________________________
+
+#(and remove pilot transects)
 
 #Only transect details (no repeats), and Remove NA rows for the dfs with NAs in any of the conditional columns:
 mySmonoOpt_details <- myDistDetails[myDistDetails$target=="Stackhousia monogyna" & myDistDetails$method=="Opt" 
@@ -305,12 +312,14 @@ mySquadOpt$obsID <- 1:nrow(mySquadOpt)
 mySquadLTS <- merge(x = mySquadLTS_details["transectID"], y = myDistData, by = "transectID")
 mySquadLTS$obsID <- 1:nrow(mySquadLTS)
 
-##########################################
-#            Corrections                 #
-##########################################
 
-#grouped data survey vs measure time doesn't match other methods
-#______________________________________________________
+#_____________________________
+
+## Grouped DS corrections ----
+#_____________________________
+
+#grouped survey use of survey time vs measure time doesn't match other methods
+#_____________________________________________________________________________
 
 #survey time is always the total
 #move 'measure time' (time to mark individuals) to two other columns
@@ -325,10 +334,15 @@ mySmonoGrouped_details$timeCount <- as_hms(mySmonoGrouped_details$timeCount)
 timeNoBands <- c(41386, 41391, 29696, 30961, 33827, 34140, 35413, 36364) 
 dntUseTime <- c(22400) # grouped surveys that should not be used in timings
 
+#_________________________
+
+## Opt DS corrections ----
+#_________________________
+
 #randomly exclude every nth measurement on the transects that were surveyed using the wrong alpha
 #______________________________________________________
 
-#Just randomly delete one ninth of the measurements (adjust time calculated to account for fewer measurements). 
+# randomly delete one ninth of the measurements (adjust time calculated to account for fewer measurements). 
 #You will end up with measurements to 8 ninths of the individuals (8/9 * 3/4 = 2/3).
 #####!!!!!##### REMEMBER TO ADJUST TOTAL + MEASURING TIMES TO ACCOUNT FOR FEWER MEASUREMENTS TOO 
 #(n obs adjusted for two of the Smono Opt transects)
@@ -360,9 +374,9 @@ timeAdjustTable$timeAdjust <- timeAdjustTable$nObsExcluded*timeAdjustTable$timeP
 #adjust measuring time in details table:
 mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID] <- as_hms(mySmonoOpt_details$timeMeasuring[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID]-timeAdjustTable$timeAdjust)
 
-###### TOTAL TIME FOR THESE TRANSECTS IS ADJUSTED IN THE 'timesDistFunc' function ####
+# TOTAL TIME FOR THESE TRANSECTS IS ADJUSTED IN THE 'timesDistFunc' function
 # but the timesDistFunc function calculates the mean and creates a new df, 
-# data in original data df remains unadjusted
+# data in original data df needs adjusting here
 
 #adjust unit time for these transects in mySmonoOpt_details
 mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID] <- as_hms(mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% timeAdjustTable$transectID]-timeAdjustTable$timeAdjust)
@@ -450,9 +464,18 @@ mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% Optadjust] <-
   as_hms(mySmonoOpt_details$unitTime[mySmonoOpt_details$transectID %in% Optadjust] + 
            mySmonoOpt_details$timeMeasAdjust[mySmonoOpt_details$transectID %in% Optadjust])
 
-##########################################
-#          End of Corrections            #
-##########################################
+# for Senecio surveys, cluster size needs consistent data
+# change NA to 1 (>1 clusters are rare and were always recorded, so NAs are 1)
+#______________________________________________________
+length(mySquadLTS$clusterSize[which(is.na(mySquadLTS$clusterSize))]) # just 1 in this df
+
+mySquadLTS$clusterSize[is.na(mySquadLTS$clusterSize)] <- 1
+
+length(mySquadOpt$clusterSize[is.na(mySquadOpt$clusterSize)]) # 244, the ones that weren't measured. This means that there could be more than 1 in these clusters: note the issue (cluster size was recorded but can't be sure all the unmeasured ones were singles - should have gone to look but didn't, cost ratio would be a bit lower)
+
+mySquadOpt$clusterSize[is.na(mySquadOpt$clusterSize)] <- 1
+
+# END OF CORRECTIONS
 
 #check all the observations are paired with a transect on the details list
 allRecords <- merge(myDistDetails, myDistData, by = "transectID", all = TRUE)
@@ -465,10 +488,10 @@ obsPerTransect, measTime, meanMeasureTime50882,endTime, noNaUnits,
 start2end3, start30961end29696, travelandClearUp, allRecords, obsOnly,
 propMeasured, propMeasured_adjust, LTSadjust, nObsLTS, nObsOpt, SquadCompare,
 eastClearUp, eastSetUp, northClearUp, northSetUp, southClearUp, southSetUp,
-westClearUp, westSetUp)
+westClearUp, westSetUp, checkDifference, checkDiffOpt)
 
-############### What has been adjusted
-############### Write notes here to print to console:
+# What has been adjusted
+# Write notes here to print to console:
 
 print("unit times for 12 transects have been adjusted/estimated using information from field notes, to correct for breaks or missing data in time fields")
 print("S monogyna LTS transects (all) and Opt transects (4th Nov) adjusted (unit time) using Cm from pilot, due to injury forced method modification")

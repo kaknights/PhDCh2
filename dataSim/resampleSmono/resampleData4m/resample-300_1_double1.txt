@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 6219 299074 5837792 "doubleObs" 09:58:00 00:05:00 4 00:07:50 65 NA NA 3 10:40:00 "same (thick kangaroo grass, short, flat), bit more long stalks" "most flowering" 00:42:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 9022 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 10674 299128 5837792 "doubleObs" 14:53:00 00:04:00 4 00:00:58 NA 0 0 NA 15:06:00 "flat, short grass, near Acacia" "no notes" 00:13:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 7506 299090 5837858 "doubleObs" 15:20:00 00:04:00 4 00:00:46 0 NA NA 0 15:32:00 "some type of oat, thick mat but sparser long grass" "no notes" 00:12:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 10675 299126 5837780 "doubleObs" 15:46:00 00:03:30 4 00:00:49 0 NA NA 0 15:59:00 "?forgot.  Flat, short grass" "no notes" 00:13:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 8705 299112 5837770 "doubleObs" 09:27:00 00:05:00 4 00:25:55 132 NA NA 7 10:23:00 "dry, flat, short grass, plenty of dead mass" "v bright" 00:56:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 9362 299112 5837776 "doubleObs" 10:44:00 00:05:00 4 00:50:43 233 NA NA 12 11:57:00 "dry, flat, mostly short grass, lots of dead/dry grass" "still v bright, most not yet flowering, had to keep counting sticks in a quadrant and gathering them up to use again" 01:13:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 7518 299090 5837834 "doubleObs" 13:54:00 00:04:30 4 00:04:40 NA 9 9 NA 14:10:00 "rocky, lots of bare earth, lots of some type of daisy - the one that's on the path" "most tiny and not flowering" 00:16:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 6714 299080 5837792 "doubleObs" 14:56:00 00:04:00 4 00:13:33 80 NA NA 8 15:34:00 "?visitor interruption" "chatted to local lady" 00:38:00

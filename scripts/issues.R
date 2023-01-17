@@ -216,3 +216,111 @@ KLTS <- tOpt/times$mean_unit_time[times$method=="LTS" & times$target=="Senecio"]
 #moving on to the unbanded analysis, not problems exactly but things to be discussed:
   # When distance models are fitting, there is some info in the printed messages that may get lost - this is things like the 'Error in model fitting, returning: half-normal key function' message.  This still gives results and a fitted model, so from the summary it isn't clear which rounds of resamples are affected.  Other message on the same output is 'Error: Error in detfct.fit.opt(ddfobj, optim.options, bounds, misc.options) : No convergence.'  These are most likely when there is a small n1 (or nt for other methods, not relevant here as the unbanded grouped sample is quite large, other methods are not used in this analysis)
   # When there are no obs in the resample, the row in the summary table says 'NA'; when there is a row of 0 values in the estimates, this probably means there were very few obs; the 'error' messages don't correspond to either of these, it looks like they are very high estimates, so maybe they contain a particular set of transects that make the model hard to fit??  e.g. where the obs were all far away?
+
+#ISSUE 7 ----
+# error in ds sampling function where ds function fails to fit any models - not able to recover the data to see what's happening. 
+#Fixed - all models failed to fit, probs just weird shape in the data by chance. Using try() to keep the loop going.
+
+#ISSUE 8 ----
+# bias precision plot - lots of issues: 1. ds sims seem to overestimate D.  In Stackhousia sims this is by a few % but in Senecio sims it's more like 20%. Even a few % is much more than the theoretical level of bias should be.  This is not field data, it's simulated using the poisson dist for n and half normal for prob det.  Same model for det func as model fitted to the full dataset.  
+# what could the problems be? The value of sigma from the field data could lead to overestimation - 
+
+plot(model)
+summary(model)
+myDsSim <- data.frame("simID" = numeric(length = nSims), "dhat" = numeric(nSims))
+
+for (simID in 1:nSims){
+  sim <- myDsSurvey(dm, nUnits, sigm, w, siteAreaM, unitL)
+  myDsSim[simID,1] <- simID
+  myDsSim[simID,"dhat"] <- sim$dht$individuals$D$Estimate
+  print(simID) 
+  }
+
+myDsSim$error <- myDsSim$dhat-dm
+myDsSim$method <- "DS"
+
+plot(myDsSim$dhat, myDsSim$error)
+mean(myDsSim$error)/dm
+
+
+# myDsSurvey test args
+dm <- 2
+nUnits <- 20
+sigm <- 2.5
+w <- 5
+unitL <- 3
+siteAreaM <- 2*w*unitL*nUnits
+#checking ds equivalency calculations:
+p <- 
+mu <- w*p
+
+N <- 20
+randN <- rpois(1000, lambda = N)
+mean(randN)
+
+#ISSUE 9 ----
+
+#finalising resampling analysis: have functions running with partial transects and clusters, Senecio dist models are having trouble fitting a lot. Investigate further: look at the histograms of the data and see which models are failing to fit, it isn't a problem if there is a good model in that round, the problems are when all models fail to fit (is it just one key function that is a really poor fit? I think the issue is that the mu value is larger than w that I measured to, so the variation in the distances is having more of an effect due to the small decrease in detectability between 0 and w). Will probably need to run the senecio resampling again to look at which models are a problem.  Can get Stackhousia going on boab (run a sample of the plots and graphs first to make sure it is all working, then export the relevant dataframes and modify the script as needed)
+
+#have run 10 rounds of Senecio ds resampling/analysis, 
+senecioDSissues <- data.frame("Round" = 1:10, 
+                              "HN_LTS" = character(10),
+                              "HN_Opt" = character(10),
+                              "HR_LTS" = character(10),
+                              "HR_Opt" = character(10),
+                              "UN_LTS" = character(10),
+                              "UN_Opt" = character(10))
+senecioDSissues[c(1,3,5,10), 2:7] <- rep("", times = 6)
+senecioDSissues[ 2, 2:7] <- c(" ", " ", "FAIL", "FAIL", " ", "error")
+senecioDSissues[4,2:7] <- c("error", " ", " ", " ", " ", " ")
+senecioDSissues[6,2:7] <- c(" ", " ", "error", " ", " ", " ")
+senecioDSissues[7, 2:7] <- c("error", "error", "FAIL", "FAIL", " ", " ")
+senecioDSissues[8, 2:7] <- c(" ", " ", "FAIL", " ", " ", " ")
+senecioDSissues[9, 2:7] <- c(" ", " ", " ", "error", "error", "error")
+
+#add selected model from that round
+senecioDSissues$selectedModLTS <- mySquad2DistResults$detfunc[mySquad2DistResults$method=="LTS"]
+senecioDSissues$selectedModOpt <- mySquad2DistResults$detfunc[mySquad2DistResults$method=="Opt"]
+
+#add model estimates (p, d and seD)(are the results dodgy?)
+
+senecioDSissues$LTS_p <- mySquad2DistResults$p[mySquad2DistResults$method=="LTS"]
+senecioDSissues$LTS_estD <- mySquad2DistResults$estD[mySquad2DistResults$method=="LTS"]
+senecioDSissues$LTS_seD <- mySquad2DistResults$seD[mySquad2DistResults$method=="LTS"]
+senecioDSissues$Opt_p <- mySquad2DistResults$p[mySquad2DistResults$method=="Opt"]
+senecioDSissues$Opt_estD <- mySquad2DistResults$estD[mySquad2DistResults$method=="Opt"]
+senecioDSissues$Opt_seD <- mySquad2DistResults$seD[mySquad2DistResults$method=="Opt"]
+
+write.csv(senecioDSissues, "results/senecioDS_Issues.csv")
+
+#histograms of the data
+
+opar <- par()
+
+png("graphics/SQissuesTestHists.png", height = 600)
+par(mfrow = c(3,2))
+
+#round 2: hazard-rate total fail
+#LTS
+hist(distSquad2[[1]][[2]][[1]][[4]]$distance, xlab = "distance (m)", main = "test round 2 LTS: hazard-rate fail")
+
+#Opt
+hist(distSquad2[[1]][[2]][[2]][[4]]$distance, xlab = "distance (m)", main = "test round 2 Opt: hazard-rate fail")
+
+#round 7: half-normal errors for both datasets and hazard-rate total fail
+#LTS
+hist(distSquad2[[1]][[7]][[1]][[4]]$distance, xlab = "distance (m)", main = "test round 7 LTS: hazard-rate fail")
+
+#Opt
+hist(distSquad2[[1]][[7]][[2]][[4]]$distance, xlab = "distance (m)", main = "test round 7 Opt: hazard-rate fail")
+
+#round 10: no fails or errors (for comparison)
+hist(distSquad2[[1]][[10]][[1]][[4]]$distance, xlab = "distance (m)", main = "test round 10 LTS: no fails/errors")
+hist(distSquad2[[1]][[10]][[2]][[4]]$distance, xlab = "distance (m)", main = "test round 10 Opt: no fails/errors")
+
+dev.off()
+
+#conclusions on issue 9: there doesn't seem to be any difference between the model estimates and precision between rounds where there were failures/errors and where everything went smoothly.  The fitted models are giving results that are ballpark similar, so I don't think the weird shapes in the data are a big deal.
+# the histograms are saved in graphics/ and the table of results is saved in results/ for ref
+
+#update git hub !!!!!

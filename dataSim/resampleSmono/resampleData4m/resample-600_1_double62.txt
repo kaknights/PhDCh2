@@ -1,0 +1,19 @@
+"samp" "date" "site" "target" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"30" 10675 2021-10-11 "Est" "Stackhousia monogyna" 299126 5837780 "doubleObs" 15:46:00 00:03:30 4 00:00:49 0 NA NA 0 15:59:00 "?forgot.  Flat, short grass" "no notes" 00:13:00
+"19" 7999 2021-10-11 "Est" "Stackhousia monogyna" 299096 5837862 "doubleObs" 16:22:00 00:03:00 4 00:00:44 0 NA NA 0 16:32:00 "thick grass not super long flat and dry" "no notes" 00:10:00
+"1" 4717 2021-10-11 "Est" "Stackhousia monogyna" 299056 5837822 "doubleObs" 10:42:00 00:06:00 4 00:00:37 NA 0 0 NA 10:53:00 "lots of bare ground, lots of dianella" "no notes" 00:11:00
+"4" 6216 2021-10-12 "Est" "Stackhousia monogyna" 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"7" 6537 2021-10-12 "Est" "Stackhousia monogyna" 299078 5837816 "doubleObs" 16:28:00 00:04:30 4 00:01:41 NA 0 0 NA 16:38:00 "no notes" "no notes" 00:10:00
+"13" 7506 2021-10-11 "Est" "Stackhousia monogyna" 299090 5837858 "doubleObs" 15:20:00 00:04:00 4 00:00:46 0 NA NA 0 15:32:00 "some type of oat, thick mat but sparser long grass" "no notes" 00:12:00
+"6" 6519 2021-10-11 "Est" "Stackhousia monogyna" 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"32" 11147 2021-10-12 "Est" "Stackhousia monogyna" 299134 5837836 "doubleObs" 14:15:00 00:05:00 4 00:01:15 0 NA NA 0 14:26:00 "Path, v short grass, orchids and path daisy" "no notes" 00:11:00
+"21" 8027 2021-10-11 "Est" "Stackhousia monogyna" 299096 5837806 "doubleObs" 16:04:00 00:05:00 4 00:01:14 NA 0 0 NA 16:17:00 "flat, short grass" "no notes" 00:13:00
+"35" 12642 2021-10-12 "Est" "Stackhousia monogyna" 299152 5837816 "doubleObs" 13:41:00 00:04:00 4 00:00:55 0 NA NA 0 13:53:00 "long grass, quite green" "no notes" 00:12:00
+"8" 6537 2021-10-12 "Est" "Stackhousia monogyna" 299078 5837816 "doubleObs" 16:28:00 00:04:30 4 00:01:41 NA 0 0 NA 16:38:00 "no notes" "no notes" 00:10:00
+"25" 8705 2021-10-12 "Est" "Stackhousia monogyna" 299112 5837770 "doubleObs" 09:27:00 00:05:00 4 00:25:55 132 NA NA 7 10:23:00 "dry, flat, short grass, plenty of dead mass" "v bright" 00:56:00
+"28" 9166 2021-10-12 "Est" "Stackhousia monogyna" 299110 5837838 "doubleObs" 10:31:00 00:04:00 4 00:00:55 NA 0 0 NA 10:41:00 "gravelly, flat, dry, short grass" "v bright" 00:10:00
+"26" 9022 2021-10-11 "Est" "Stackhousia monogyna" 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"3" 6216 2021-10-12 "Est" "Stackhousia monogyna" 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"24" 8705 2021-10-12 "Est" "Stackhousia monogyna" 299112 5837770 "doubleObs" 09:27:00 00:05:00 4 00:25:55 132 NA NA 7 10:23:00 "dry, flat, short grass, plenty of dead mass" "v bright" 00:56:00
+"22" 8027 2021-10-11 "Est" "Stackhousia monogyna" 299096 5837806 "doubleObs" 16:04:00 00:05:00 4 00:01:14 NA 0 0 NA 16:17:00 "flat, short grass" "no notes" 00:13:00
+"12" 7506 2021-10-11 "Est" "Stackhousia monogyna" 299090 5837858 "doubleObs" 15:20:00 00:04:00 4 00:00:46 0 NA NA 0 15:32:00 "some type of oat, thick mat but sparser long grass" "no notes" 00:12:00

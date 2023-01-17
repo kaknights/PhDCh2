@@ -1,0 +1,21 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-19 "Est" "Senecio quadridentatus" 388 299106 5837873 "doubleObs" 09:40:00 00:05:00 12.25 00:01:42 NA 0 0 NA 09:59:00 "flat, quite green, mixed sp. Tufts" "no notes" 00:19:00
+"2" 2021-10-19 "Est" "Senecio quadridentatus" 481 299113 5837862 "doubleObs" 10:29:00 00:03:00 12.25 00:00:43 0 NA NA 0 10:36:00 "half on path, half kangaroo grass" "no notes" 00:07:00
+"3" 2021-10-19 "Est" "Senecio quadridentatus" 532 299116 5837841 "doubleObs" 10:37:00 00:04:00 12.25 00:01:12 NA 0 0 NA 10:47:00 "half on path, half kangaroo grass" "no notes" 00:10:00
+"4" 2021-10-19 "Est" "Senecio quadridentatus" 619 299123 5837852 "doubleObs" 10:52:00 00:03:00 12.25 00:01:13 0 NA NA 0 10:59:00 "flat, short grassy kangaroo grass" "no notes" 00:07:00
+"5" 2021-10-19 "Est" "Senecio quadridentatus" 646 299127 2837915 "doubleObs" 11:42:00 00:03:00 12.25 00:01:21 0 NA NA 0 11:50:00 "Dry, kangaroo grass" "no notes" 00:08:00
+"6" 2021-10-19 "Est" "Senecio quadridentatus" 839 299141 5837869 "doubleObs" 13:49:00 00:03:00 12.25 00:02:29 1 NA NA 0 14:04:00 "flat, half short half kangaroo grass" "no notes" 00:15:00
+"7" 2021-10-19 "Est" "Senecio quadridentatus" 926 299148 5837880 "doubleObs" 14:18:00 00:02:00 12.25 00:07:07 11 NA NA 0 14:33:00 "mostly flat, couple dips, kangaroo grass" "no notes" 00:15:00
+"8" 2021-10-19 "Est" "Senecio quadridentatus" 1012 299155 5837894 "doubleObs" 15:05:00 00:02:00 12.25 NA NA 1 6 NA 15:16:00 "partial path, mostly kangaroo grass, flat and dry" "no notes" 00:11:00
+"9" 2021-10-19 "Est" "Senecio quadridentatus" 1019 299155 5837869 "doubleObs" 15:23:00 00:02:00 12.25 00:03:58 7 NA NA 1 15:33:00 "flat, boggy, short/kangaroo grass" "no notes" 00:10:00
+"10" 2021-10-19 "Est" "Senecio quadridentatus" 1050 299158 5837918 "doubleObs" 15:34:00 00:02:00 12.25 00:03:34 NA 0 0 NA 15:46:00 "flat, mostly short grass" "no notes" 00:12:00
+"11" 2021-10-20 "Est" "Senecio quadridentatus" 1238 299172 5837890 "doubleObs" 10:45:00 00:02:00 12.25 00:04:59 16 NA NA 1 10:59:00 "kangaroo grass, flat" "v bright" 00:14:00
+"12" 2021-10-20 "Est" "Senecio quadridentatus" 1322 299179 5837911 "doubleObs" 11:18:00 00:02:00 12.25 00:02:06 0 NA NA 0 11:25:00 "flat, kangaroo grass" "v bright" 00:07:00
+"13" 2021-10-20 "Est" "Senecio quadridentatus" 1332 299179 5837876 "doubleObs" 11:03:00 00:02:00 12.25 00:04:00 NA 1 12 NA 11:16:00 "mostly long kangaroo grass, flat" "changed travel time manually to 11:03, as 11:33 was entered on the sheet but makes sense for it to be 11:03 (in sequence with the close quadrats)" 00:13:00
+"14" 2021-10-20 "Est" "Senecio quadridentatus" 1248 299172 5837855 "doubleObs" 10:13:00 00:02:00 12.25 00:01:54 1 NA NA 0 10:22:00 "flat, kangaroo grass" "no notes" 00:09:00
+"15" 2021-10-20 "Est" "Senecio quadridentatus" 1591 299200 5837915 "doubleObs" 11:44:00 00:02:00 12.25 00:01:16 NA 0 0 NA 11:52:00 "flat, smaller tufts, kangaroo grass" "v bright, glare from grass" 00:08:00
+"16" 2021-10-20 "Est" "Senecio quadridentatus" 561 299120 5837897 "doubleObs" 13:43:00 00:02:00 12.25 00:01:15 NA 0 0 NA 13:51:00 "half long kangaroo grass, half shorter, flat" "no notes" 00:08:00
+"17" 2021-10-20 "Est" "Senecio quadridentatus" 731 299134 5837932 "doubleObs" 13:28:00 00:02:00 12.25 00:00:47 0 NA NA 0 13:32:00 "mostly short, some kangaroo grass" "v bright" 00:04:00
+"18" 2021-10-20 "Est" "Senecio quadridentatus" 1153 299165 5837873 "doubleObs" 10:26:00 00:02:00 12.25 00:03:30 NA 0 12 NA 10:42:00 "long kangaroo grass" "v bright" 00:16:00
+"19" 2021-10-20 "Est" "Senecio quadridentatus" 774 299137 5837939 "doubleObs" 13:02:00 00:02:00 12.25 00:01:09 0 NA NA 0 13:09:00 "flat, kangaroo grass" "v bright" 00:07:00
+"20" 2021-10-20 "Est" "Senecio quadridentatus" 867 NA NA "doubleObs" 13:16:00 00:02:00 12.25 00:01:04 NA 0 0 NA 13:25:00 "half path, half kangaroo grass" "no notes" 00:09:00

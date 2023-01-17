@@ -19,6 +19,7 @@ withinArea <- c(25549, 30027, 30322, 31889, 35684, 37894,
 #think some of these weren't actually surveyed...
 
 mySubset <- smDist[smDist$transectID%in%withinArea, ]
+
 #calculate alpha opt and distance opt 
 length(unique(mySubset$transectID))
 nDet <- length(na.omit(mySubset$perpDist_m))

@@ -1,0 +1,10 @@
+"","target","method","mean_unit_time","mean_survey_time","mean_other_time","n_complete_records","totalEffort"
+"1","Stackhousia","plot1m",12.24,2.04,10.2,30,367.2
+"2","Stackhousia","plot4m",17.12,5.98,11.14,30,513.6
+"3","Stackhousia","Opt",13.79,6.82,6.97,29,551.6
+"4","Stackhousia","LTS",20.85,15.13,5.72,31,667.2
+"5","Stackhousia","GroupedBands",24.41,2.09,22.32,13,561.43
+"6","Stackhousia","GroupedNoBands",5.37,2.09,3.28,6,32.22
+"7","Senecio","plot",9.09,2.01,7.08,42,418.14
+"8","Senecio","Opt",45.65,30.96,14.69,10,593.45
+"9","Senecio","LTS",77.9,62.89,15.01,7,545.3

@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 4717 299056 5837822 "doubleObs" 10:42:00 00:06:00 4 00:00:37 NA 0 0 NA 10:53:00 "lots of bare ground, lots of dianella" "no notes" 00:11:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 6519 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 9022 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 5536 299066 5837838 "doubleObs" 12:02:00 00:04:00 4 00:01:08 0 NA NA 0 12:14:00 "hip height kangaroo grass, rocky but no bare soil" "no notes" 00:12:00
+"5" 2021-10-12 "Est" "Stackhousia monogyna" 8705 299112 5837770 "doubleObs" 09:27:00 00:05:00 4 00:25:55 132 NA NA 7 10:23:00 "dry, flat, short grass, plenty of dead mass" "v bright" 00:56:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 9362 299112 5837776 "doubleObs" 10:44:00 00:05:00 4 00:50:43 233 NA NA 12 11:57:00 "dry, flat, mostly short grass, lots of dead/dry grass" "still v bright, most not yet flowering, had to keep counting sticks in a quadrant and gathering them up to use again" 01:13:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 6216 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 7518 299090 5837834 "doubleObs" 13:54:00 00:04:30 4 00:04:40 NA 9 9 NA 14:10:00 "rocky, lots of bare earth, lots of some type of daisy - the one that's on the path" "most tiny and not flowering" 00:16:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 6714 299080 5837792 "doubleObs" 14:56:00 00:04:00 4 00:13:33 80 NA NA 8 15:34:00 "?visitor interruption" "chatted to local lady" 00:38:00

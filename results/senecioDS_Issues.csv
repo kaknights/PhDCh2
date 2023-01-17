@@ -1,0 +1,11 @@
+"","Round","HN_LTS","HN_Opt","HR_LTS","HR_Opt","UN_LTS","UN_Opt","selectedModLTS","selectedModOpt","LTS_p","LTS_estD","LTS_seD","Opt_p","Opt_estD","Opt_seD"
+"1",1,"","","","","","","half-normal key function","uniform key function with cosine(1) adjustments",0.872833747060719,0.113503415872809,0.058632129755541,0.784911714715768,0.0988709921702498,0.0399507784126345
+"2",2," "," ","FAIL","FAIL"," ","error","uniform key function with cosine(1) adjustments","uniform key function with cosine(1) adjustments",0.937555493413638,0.135711077968727,0.0487927930380175,0.974683467369335,0.15674604411843,0.0367937187152298
+"3",3,"","","","","","","uniform key function with cosine(1) adjustments","uniform key function with cosine(1) adjustments",0.93069108125034,0.0763339645753673,0.0139775253381001,0.880296182394188,0.112141943784774,0.0341850028871662
+"4",4,"error"," "," "," "," "," ","half-normal key function","half-normal key function",0.980335408616436,0.118393302779636,0.0503678723878128,0.945595946416432,0.206922555583008,0.0502910175298567
+"5",5,"","","","","","","half-normal key function","uniform key function with cosine(1) adjustments",0.867771098496879,0.245745969610403,0.0766179852214805,0.844501990290598,0.20923993513131,0.0484457737475098
+"6",6," "," ","error"," "," "," ","hazard-rate key function","half-normal key function",0.837912016114001,0.102796361715226,0.0647022163297293,0.811476468759097,0.107381845012847,0.0401892212229047
+"7",7,"error","error","FAIL","FAIL"," "," ","uniform key function with cosine(1) adjustments","half-normal key function",0.97409323946214,0.0643168223073653,0.0141999904227886,0.993462809189338,0.07543521774558,0.0133368243756622
+"8",8," "," ","FAIL"," "," "," ","half-normal key function","half-normal key function",0.934482694084776,0.276546904672765,0.0711781464449444,0.838244545006798,0.250511621281469,0.0587713040619704
+"9",9," "," "," ","error","error","error","hazard-rate key function","hazard-rate key function",0.881732141174654,0.255107236649372,0.0701119182429163,0.882449387682741,0.243030148299745,0.055248924778836
+"10",10,"","","","","","","half-normal key function with cosine(2) adjustments","half-normal key function",0.787638724228473,0.105496759843451,0.0171614973798353,0.86840184913228,0.087964908141568,0.0147003840326713

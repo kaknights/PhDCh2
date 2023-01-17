@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 6219 299074 5837792 "doubleObs" 09:58:00 00:05:00 4 00:07:50 65 NA NA 3 10:40:00 "same (thick kangaroo grass, short, flat), bit more long stalks" "most flowering" 00:42:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 9022 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 5874 299070 5837822 "doubleObs" 12:18:00 00:06:00 4 00:02:00 NA 0 0 NA 12:34:00 "thick, dead mat of grass w waist height kangaroo grass" "no notes" 00:16:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 7508 299090 5837854 "doubleObs" 13:14:00 00:04:00 4 00:01:40 0 NA NA 0 13:29:00 "lots of dead standing biomass, dry (not boggy)" "no notes" 00:15:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 9359 299122 5837782 "doubleObs" 16:39:00 00:03:30 4 00:01:05 NA 0 0 NA 16:50:00 "short grass, flat, dry, little bare patch" "no notes" 00:11:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 9166 299110 5837838 "doubleObs" 10:31:00 00:04:00 4 00:00:55 NA 0 0 NA 10:41:00 "gravelly, flat, dry, short grass" "v bright" 00:10:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 9362 299112 5837776 "doubleObs" 10:44:00 00:05:00 4 00:50:43 233 NA NA 12 11:57:00 "dry, flat, mostly short grass, lots of dead/dry grass" "still v bright, most not yet flowering, had to keep counting sticks in a quadrant and gathering them up to use again" 01:13:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 6216 299074 5837798 "doubleObs" 13:10:00 00:05:00 4 00:09:25 NA 6 40 NA 13:40:00 "long, dead (dry?) grass, thick mat" "no notes" 00:30:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 11147 299134 5837836 "doubleObs" 14:15:00 00:05:00 4 00:01:15 0 NA NA 0 14:26:00 "Path, v short grass, orchids and path daisy" "no notes" 00:11:00

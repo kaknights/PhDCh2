@@ -1,0 +1,19 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 6219 299074 5837792 "doubleObs" 09:58:00 00:05:00 4 00:07:50 65 NA NA 3 10:40:00 "same (thick kangaroo grass, short, flat), bit more long stalks" "most flowering" 00:42:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 4717 299056 5837822 "doubleObs" 10:42:00 00:06:00 4 00:00:37 NA 0 0 NA 10:53:00 "lots of bare ground, lots of dianella" "no notes" 00:11:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 6519 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 9022 299108 5837796 "doubleObs" 11:47:00 00:05:00 4 00:02:22 NA 0 0 NA 12:01:00 "short, green grass, no bare soil, dry" "no notes" 00:14:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 5874 299070 5837822 "doubleObs" 12:18:00 00:06:00 4 00:02:00 NA 0 0 NA 12:34:00 "thick, dead mat of grass w waist height kangaroo grass" "no notes" 00:16:00
+"6" 2021-10-11 "Est" "Stackhousia monogyna" 7508 299090 5837854 "doubleObs" 13:14:00 00:04:00 4 00:01:40 0 NA NA 0 13:29:00 "lots of dead standing biomass, dry (not boggy)" "no notes" 00:15:00
+"7" 2021-10-11 "Est" "Stackhousia monogyna" 7375 299086 5837780 "doubleObs" 13:31:00 00:08:20 4 00:08:03 NA 6 96 NA 14:18:00 "plenty of dead grass but short, green, flat, dry" "set up time includes Linda getting a phone call, search time also unsure (may have pressed 'stop' by accident when putting clipboard up jumper when it started raining) in 4m^3" 00:47:00
+"8" 2021-10-11 "Est" "Stackhousia monogyna" 10674 299128 5837792 "doubleObs" 14:53:00 00:04:00 4 00:00:58 NA 0 0 NA 15:06:00 "flat, short grass, near Acacia" "no notes" 00:13:00
+"9" 2021-10-11 "Est" "Stackhousia monogyna" 7838 299094 5837854 "doubleObs" 15:34:00 00:05:00 4 00:01:13 NA 0 0 NA 15:44:00 "thick mat of dry grass w some long kangaroo grass" "no notes" 00:10:00
+"10" 2021-10-11 "Est" "Stackhousia monogyna" 7999 299096 5837862 "doubleObs" 16:22:00 00:03:00 4 00:00:44 0 NA NA 0 16:32:00 "thick grass not super long flat and dry" "no notes" 00:10:00
+"11" 2021-10-11 "Est" "Stackhousia monogyna" 9359 299122 5837782 "doubleObs" 16:39:00 00:03:30 4 00:01:05 NA 0 0 NA 16:50:00 "short grass, flat, dry, little bare patch" "no notes" 00:11:00
+"12" 2021-10-12 "Est" "Stackhousia monogyna" 8705 299112 5837770 "doubleObs" 09:27:00 00:05:00 4 00:25:55 132 NA NA 7 10:23:00 "dry, flat, short grass, plenty of dead mass" "v bright" 00:56:00
+"13" 2021-10-12 "Est" "Stackhousia monogyna" 12642 299152 5837816 "doubleObs" 13:41:00 00:04:00 4 00:00:55 0 NA NA 0 13:53:00 "long grass, quite green" "no notes" 00:12:00
+"14" 2021-10-12 "Est" "Stackhousia monogyna" 7518 299090 5837834 "doubleObs" 13:54:00 00:04:30 4 00:04:40 NA 9 9 NA 14:10:00 "rocky, lots of bare earth, lots of some type of daisy - the one that's on the path" "most tiny and not flowering" 00:16:00
+"15" 2021-10-12 "Est" "Stackhousia monogyna" 7520 299088 5837820 "doubleObs" 15:42:00 00:04:30 4 00:13:52 NA 8 48 NA 16:15:00 "little patch of other Stackhousia sp., some wide bladed grass, not long, dry, flat" "visitor again around 4 mins - 7 mins" 00:33:00
+"16" 2021-10-12 "Est" "Stackhousia monogyna" 8014 299096 5837832 "doubleObs" 16:16:00 00:04:00 4 00:02:05 0 NA NA 0 16:26:00 "dry, bit rocky, flat, the path daisy, mostly short tufty grass" "no notes" 00:10:00
+"17" 2021-10-12 "Est" "Stackhousia monogyna" 6537 299078 5837816 "doubleObs" 16:28:00 00:04:30 4 00:01:41 NA 0 0 NA 16:38:00 "no notes" "no notes" 00:10:00
+"18" 2021-10-12 "Est" "Stackhousia monogyna" 7528 299090 5837814 "doubleObs" 16:41:00 00:03:30 4 00:13:28 67 NA NA 4 17:12:00 "thick mat of tufty grass, flat and dry." "no notes" 00:31:00

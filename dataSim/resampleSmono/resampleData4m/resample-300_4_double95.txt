@@ -1,0 +1,10 @@
+"date" "site" "target" "plotID" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"1" 2021-10-11 "Est" "Stackhousia monogyna" 6519 299078 5837852 "doubleObs" 11:34:00 00:06:00 4 00:01:29 0 NA NA 0 11:46:00 "tufty kangaroo grass, small bare patch" "no notes" 00:12:00
+"2" 2021-10-11 "Est" "Stackhousia monogyna" 5874 299070 5837822 "doubleObs" 12:18:00 00:06:00 4 00:02:00 NA 0 0 NA 12:34:00 "thick, dead mat of grass w waist height kangaroo grass" "no notes" 00:16:00
+"3" 2021-10-11 "Est" "Stackhousia monogyna" 7508 299090 5837854 "doubleObs" 13:14:00 00:04:00 4 00:01:40 0 NA NA 0 13:29:00 "lots of dead standing biomass, dry (not boggy)" "no notes" 00:15:00
+"4" 2021-10-11 "Est" "Stackhousia monogyna" 7506 299090 5837858 "doubleObs" 15:20:00 00:04:00 4 00:00:46 0 NA NA 0 15:32:00 "some type of oat, thick mat but sparser long grass" "no notes" 00:12:00
+"5" 2021-10-11 "Est" "Stackhousia monogyna" 10675 299126 5837780 "doubleObs" 15:46:00 00:03:30 4 00:00:49 0 NA NA 0 15:59:00 "?forgot.  Flat, short grass" "no notes" 00:13:00
+"6" 2021-10-12 "Est" "Stackhousia monogyna" 7518 299090 5837834 "doubleObs" 13:54:00 00:04:30 4 00:04:40 NA 9 9 NA 14:10:00 "rocky, lots of bare earth, lots of some type of daisy - the one that's on the path" "most tiny and not flowering" 00:16:00
+"7" 2021-10-12 "Est" "Stackhousia monogyna" 11147 299134 5837836 "doubleObs" 14:15:00 00:05:00 4 00:01:15 0 NA NA 0 14:26:00 "Path, v short grass, orchids and path daisy" "no notes" 00:11:00
+"8" 2021-10-12 "Est" "Stackhousia monogyna" 6714 299080 5837792 "doubleObs" 14:56:00 00:04:00 4 00:13:33 80 NA NA 8 15:34:00 "?visitor interruption" "chatted to local lady" 00:38:00
+"9" 2021-10-12 "Est" "Stackhousia monogyna" 7528 299090 5837814 "doubleObs" 16:41:00 00:03:30 4 00:13:28 67 NA NA 4 17:12:00 "thick mat of tufty grass, flat and dry." "no notes" 00:31:00

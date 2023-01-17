@@ -1,0 +1,11 @@
+"transectID" "date" "species" "indivID" "perpDist_m" "clusterSize" "flowers/fruit" "no flowers/fruit" "heightClass" "section" "notes" "obsID"
+"1" 23964 2021-11-02 "Stackhousia monogyna" 2 0.91 1 0 NA NA 1 "missed a couple out on the edge (2 x 0)" 1
+"2" 23964 2021-11-02 "Stackhousia monogyna" 3 0.5 1 0 NA NA 2 "missed a couple out on the edge (2 x 0)" 2
+"3" 23964 2021-11-02 "Stackhousia monogyna" 1 0.21 1 0 NA NA 1 "missed a couple out on the edge (2 x 0)" 3
+"598" 37973 2021-11-02 "Stackhousia monogyna" 5 0.77 1 0 NA NA 1 NA 598
+"599" 37973 2021-11-02 "Stackhousia monogyna" 6 0.91 1 0 NA NA 1 NA 599
+"600" 37973 2021-11-02 "Stackhousia monogyna" 7 0.59 1 0 NA NA 1 NA 600
+"604" 37973 2021-11-02 "Stackhousia monogyna" 3 0.7 1 0 NA NA 1 NA 604
+"605" 37973 2021-11-02 "Stackhousia monogyna" 4 0.67 1 0 NA NA 1 NA 605
+"618" 37973 2021-11-02 "Stackhousia monogyna" 1 0.45 1 0 NA NA 1 NA 618
+"619" 37973 2021-11-02 "Stackhousia monogyna" 2 0.54 1 0 NA NA 1 NA 619

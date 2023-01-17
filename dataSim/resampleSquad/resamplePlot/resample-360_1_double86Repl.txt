@@ -1,0 +1,21 @@
+"samp" "date" "site" "target" "nwCornerX" "nwCornerY" "method" "travelStartTime" "setUpTime" "area_m2" "timeSearch_m" "kkPrimaryCount" "kkSecondaryCount" "SecObsPrimaryCount" "SecObsSecondaryCount" "finishTime" "plotDescription" "notes" "unitTime"
+"14" 692 2021-10-19 "Est" "Senecio quadridentatus" 299130 5837911 "doubleObs" 12:02:00 00:03:00 12.25 00:04:45 6 NA NA 0 12:18:00 "dry kangaroo grass, small bare patches" "All <25cm, v bright" 00:16:00
+"35" 1250 2021-10-20 "Est" "Senecio quadridentatus" 299172 5837848 "doubleObs" 10:05:00 00:02:00 12.25 00:01:25 NA 0 0 NA 10:12:00 "long kangaroo grass" "v bright, break for eyewash" 00:07:00
+"20" 774 2021-10-20 "Est" "Senecio quadridentatus" 299137 5837939 "doubleObs" 13:02:00 00:02:00 12.25 00:01:09 0 NA NA 0 13:09:00 "flat, kangaroo grass" "v bright" 00:07:00
+"3" 480 2021-10-19 "Est" "Senecio quadridentatus" 299113 5837866 "doubleObs" 10:20:00 00:02:00 12.25 00:01:00 NA 0 0 NA 10:26:00 "half on path, half kangaroo grass" "no notes" 00:06:00
+"34" 1153 2021-10-20 "Est" "Senecio quadridentatus" 299165 5837873 "doubleObs" 10:26:00 00:02:00 12.25 00:03:30 NA 0 12 NA 10:42:00 "long kangaroo grass" "v bright" 00:16:00
+"16" 692 2021-10-19 "Est" "Senecio quadridentatus" 299130 5837911 "doubleObs" 12:02:00 00:03:00 12.25 00:04:45 6 NA NA 0 12:18:00 "dry kangaroo grass, small bare patches" "All <25cm, v bright" 00:16:00
+"36" 1322 2021-10-20 "Est" "Senecio quadridentatus" 299179 5837911 "doubleObs" 11:18:00 00:02:00 12.25 00:02:06 0 NA NA 0 11:25:00 "flat, kangaroo grass" "v bright" 00:07:00
+"11" 622 2021-10-19 "Est" "Senecio quadridentatus" 299123 5837841 "doubleObs" 11:35:00 00:04:00 12.25 00:01:21 NA 0 0 NA 11:38:00 "longer grass, lots of plantago" "no notes" 00:03:00
+"32" 1060 2021-10-19 "Est" "Senecio quadridentatus" 299158 5837883 "doubleObs" 15:47:00 00:02:00 12.25 00:01:28 0 NA NA 0 15:57:00 "flat, mostly short grass" "no notes" 00:10:00
+"26" 964 2021-10-20 "Est" "Senecio quadridentatus" NA NA "doubleObs" 14:37:00 00:02:00 12.25 00:01:21 0 NA NA 0 14:45:00 "flat, short kangaroo grass" "no notes" 00:08:00
+"30" 1050 2021-10-19 "Est" "Senecio quadridentatus" 299158 5837918 "doubleObs" 15:34:00 00:02:00 12.25 00:03:34 NA 0 0 NA 15:46:00 "flat, mostly short grass" "no notes" 00:12:00
+"29" 1019 2021-10-19 "Est" "Senecio quadridentatus" 299155 5837869 "doubleObs" 15:23:00 00:02:00 12.25 00:03:58 7 NA NA 1 15:33:00 "flat, boggy, short/kangaroo grass" "no notes" 00:10:00
+"22" 952 2021-10-20 "Est" "Senecio quadridentatus" NA NA "doubleObs" 12:52:00 00:02:00 12.25 00:01:31 NA 0 0 NA 13:00:00 "half path, half kangaroo grass" "no notes" 00:08:00
+"12" 646 2021-10-19 "Est" "Senecio quadridentatus" 299127 2837915 "doubleObs" 11:42:00 00:03:00 12.25 00:01:21 0 NA NA 0 11:50:00 "Dry, kangaroo grass" "no notes" 00:08:00
+"33" 1093 2021-10-19 "Est" "Senecio quadridentatus" 299162 5837925 "doubleObs" 16:02:00 00:02:00 12.25 00:01:20 NA 0 0 NA 16:11:00 "uneven, long grass, lots of briza (min?)" "no notes" 00:09:00
+"10" 611 2021-10-20 "Est" "Senecio quadridentatus" NA NA "doubleObs" 13:56:00 00:02:00 12.25 00:01:33 0 NA NA 0 14:03:00 "half short, half kangaroo grass" "no notes" 00:07:00
+"31" 1050 2021-10-19 "Est" "Senecio quadridentatus" 299158 5837918 "doubleObs" 15:34:00 00:02:00 12.25 00:03:34 NA 0 0 NA 15:46:00 "flat, mostly short grass" "no notes" 00:12:00
+"18" 751 2021-10-19 "Est" "Senecio quadridentatus" 299134 5837862 "doubleObs" 13:37:00 00:02:00 12.25 NA NA 0 0 NA 13:48:00 "flat, path daisy, kangaroo grass" "Forgot to write down the search time before clearing stopwatch! Was consistent with others." 00:11:00
+"7" 561 2021-10-20 "Est" "Senecio quadridentatus" 299120 5837897 "doubleObs" 13:43:00 00:02:00 12.25 00:01:15 NA 0 0 NA 13:51:00 "half long kangaroo grass, half shorter, flat" "no notes" 00:08:00
+"24" 964 2021-10-20 "Est" "Senecio quadridentatus" NA NA "doubleObs" 14:37:00 00:02:00 12.25 00:01:21 0 NA NA 0 14:45:00 "flat, short kangaroo grass" "no notes" 00:08:00

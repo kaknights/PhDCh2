@@ -1,0 +1,13 @@
+"date" "site" "transectID" "target" "method" "travelStartTime" "setUpTime" "length_m" "surveyTime" "halfwayTime" "finishTime" "timeMeasuring" "halfwayMeasure" "southX" "southY" "observer" "recorder" "siteDescription" "notes" "unitTime" "timeMeasAdjust"
+"1" 2021-10-31 "Est" 24891 "Stackhousia monogyna" "Standard" 12:11:00 00:02:00 2 00:00:17 NA 12:15:00 00:00:00 NA NA NA "KK" "KK" "dianella patch, gravelly" NA 00:04:00 NA
+"2" 2021-10-31 "Est" 31867 "Stackhousia monogyna" "Standard" 12:31:00 00:02:00 2 00:00:39 NA 12:36:00 00:00:00 NA NA NA "KK" "KK" "short veg, daisies and pimelea, dry and gravelly" NA 00:05:00 NA
+"3" 2021-10-31 "Est" 34713 "Stackhousia monogyna" "Standard" 12:45:00 00:03:00 2 00:00:40 NA 12:51:00 00:00:00 NA NA NA "KK" "KK" "Short, sparse grass, daisy, some visible bare ground" NA 00:06:00 NA
+"4" 2021-10-31 "Est" 48688 "Stackhousia monogyna" "Standard" 10:35:00 00:03:00 2 00:00:24 NA 10:40:00 00:00:00 NA NA NA "KK" "KK" "long grass, quite tufty" NA 00:05:00 NA
+"5" 2021-11-02 "Est" 19854 "Stackhousia monogyna" "Standard" 13:47:00 00:02:00 2 00:00:16 NA 13:51:00 00:00:00 NA NA NA "KK" "KK" "lots of dead mass" NA 00:04:00 NA
+"6" 2021-11-02 "Est" 21136 "Stackhousia monogyna" "Standard" 13:51:00 00:01:00 2 00:00:16 NA 13:59:00 00:00:00 NA NA NA "KK" "KK" "lots of dead mass, few longer bits" "visitor turned up to say hi" 00:08:00 NA
+"7" 2021-11-02 "Est" 22070 "Stackhousia monogyna" "Standard" 14:00:00 00:03:00 2 00:00:13 NA 14:05:00 00:00:00 NA NA NA "KK" "KK" "shorter grass, lots of dead mass" NA 00:05:00 NA
+"8" 2021-11-02 "Est" 23980 "Stackhousia monogyna" "Standard" 14:27:00 00:01:00 2 00:17:50 NA 14:50:00 00:07:59 NA NA NA "KK" "KK" "lots of dead mass" "[measuring done by assistant after counting/marking] [counting/marking time 10 mins 51 secs]" 00:41:08 1088
+"9" 2021-11-02 "Est" 23990 "Stackhousia monogyna" "Standard" 15:08:00 00:01:00 2 00:20:05 NA 15:34:00 00:09:00 NA NA NA "KK" "KK" "long grass, plantago, lots of dead mass" "[measuring done by assistant after counting/marking] [counting/marking time 11 mins 5 secs]" 00:45:27 1167
+"10" 2021-11-02 "Est" 35432 "Stackhousia monogyna" "Standard" 11:11:00 00:01:00 2 00:00:12 NA 11:13:00 00:00:00 NA NA NA "KK" "KK" "short grass" NA 00:02:00 NA
+"11" 2021-11-02 "Est" 37973 "Stackhousia monogyna" "Standard" 09:20:00 00:01:00 2 00:05:18 NA 09:31:00 00:02:12 NA NA NA "KK" "KK" "long-ish wisps of grass, mostly short" "[measuring done by assistant after counting/marking] [counting/marking time 3 mins 6 secs]" 01:12:14 3674
+"12" 2021-11-02 "Est" 38271 "Stackhousia monogyna" "Standard" 12:17:00 00:01:00 2 00:00:23 NA 12:18:00 00:00:00 NA NA NA "KK" "KK" "Short grass, little emerging kangaroo grass sprouts" NA 00:01:00 NA

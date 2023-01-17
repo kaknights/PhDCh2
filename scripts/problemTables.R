@@ -2,18 +2,14 @@
 
 #read in resampled data (first number in file is effort, second is the random seed)
 #S mono data
-mySmonoDistResults <- read.table("dataSim/resampleSmono/distResults-300_1.txt")
-Plotresults1m <- read.table("dataSim/resampleSmono/plot1m-300_1.txt")
-Plotresults4m <- read.table("dataSim/resampleSmono/plot4m-300_1.txt")
+#mySmonoDistResults <- read.table("dataSim/resampleSmono/distResults-600_1.txt")
+#Plotresults1m <- read.table("dataSim/resampleSmono/plot1m-600_1.txt")
+#Plotresults4m <- read.table("dataSim/resampleSmono/plot4m-600_1.txt")
 
 #S quad data
 
-mySquadDistResults1 <- read.table("dataSim/resampleSquad/distResults-275_1.txt")
-PlotresultsSQ1 <- read.table("dataSim/resampleSquad/plot-275_1.txt")
-
-#Squad data (with replacement)
-mySquadDistResults2 <- read.table("dataSim/resampleSquad/distResults-360_1Repl.txt")
-PlotresultsSQ2 <- read.table("dataSim/resampleSquad/plot-360_1Repl.txt")
+#mySquadDistResults2 <- read.table("dataSim/resampleSquad/distResults-360_1Repl.txt")
+#PlotresultsSQ2 <- read.table("dataSim/resampleSquad/plot-360_1Repl.txt")
 
 
 #count number of units where model couldn't be fitted for ds, and where p couldn't be estimated for double obs plots
@@ -23,11 +19,11 @@ problemsSM <- data.frame("method" = character(7),
                        "mean p" = numeric(7),
                        "S" = integer(7),
                        "mean n_t" = numeric(7))
-problemsSQ <- data.frame("method" = character(8),
-                       "prop fail" = numeric(8),
-                       "mean p" = numeric(8),
-                       "S" = integer(8),
-                       "mean n_t" = numeric(8))
+problemsSQ <- data.frame("method" = character(4),
+                       "prop fail" = numeric(4),
+                       "mean p" = numeric(4),
+                       "S" = integer(4),
+                       "mean n_t" = numeric(4))
 
 #SM fill in the table
 problemsSM$method <- c("LTS", "Opt", "GrB", 
@@ -38,14 +34,14 @@ problemsSM$method <- c("LTS", "Opt", "GrB",
 #prepare summaries for 'prop fail' column
 dsPropfailSM <- aggregate(mySmonoDistResults$estD[!is.na(mySmonoDistResults$estD)], by = list(mySmonoDistResults$method[!is.na(mySmonoDistResults$estD)]), FUN = length)
 
-problemsSM$prop.fail[1] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="LTS"]/100
-problemsSM$prop.fail[2] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="Opt"]/100
-problemsSM$prop.fail[3] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="GrB"]/100
+problemsSM$prop.fail[1] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="LTS"]/1000
+problemsSM$prop.fail[2] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="Opt"]/1000
+problemsSM$prop.fail[3] <- 1- dsPropfailSM$x[dsPropfailSM$Group.1=="GrB"]/1000
 
 problemsSM$prop.fail[4] <- NA
-problemsSM$prop.fail[5] <- sum(is.na(Plotresults1m$probOverall))/100
+problemsSM$prop.fail[5] <- sum(is.na(Plotresults1m$probOverall))/1000
 problemsSM$prop.fail[6] <- NA
-problemsSM$prop.fail[7] <- sum(is.na(Plotresults4m$probOverall))/100
+problemsSM$prop.fail[7] <- sum(is.na(Plotresults4m$probOverall))/1000
 
 # SM mean p ----
 dsPSM <- aggregate(mySmonoDistResults$p[!is.na(mySmonoDistResults$p)], by = list(mySmonoDistResults$method[!is.na(mySmonoDistResults$p)]), FUN = mean)
@@ -73,7 +69,6 @@ problemsSM$se.p[6] <- NA
 problemsSM$se.p[7] <- round(sd(Plotresults4m$probOverall[!is.na(Plotresults4m$probOverall)]), 3)
 
 #SM S and nt ----
-#data <- read.table("dataSim/resampleSmono/resampleLTS/resamp1.txt")
 
 #unitCount function makes a table of one row per resample, gives the n units in that resample and the total counts of individuals detected (single and double obs for plots, total n for all distance methods)
 
@@ -81,7 +76,7 @@ unitCount <- function(folder1, folder2, filename1, filename2, method){
   #data1 is the plot resample OR the object table for distance data
   data1 <- read.table(paste0("dataSim/", folder1, "/", folder2, "/", filename1, ".txt"))
   if(method=="plot"){
-    nUnits <- length(data1$plotID)
+    nUnits <- length(data1$samp)
     count1 <- sum(data1$kkPrimaryCount, na.rm = TRUE)+sum(data1$SecObsPrimaryCount, na.rm = TRUE)
     countAll <- sum(data1$kkPrimaryCount, na.rm = TRUE)+sum(data1$kkSecondaryCount, na.rm = TRUE)+sum(data1$SecObsPrimaryCount, na.rm = TRUE)+sum(data1$SecObsSecondaryCount, na.rm = TRUE)
    vector <- c(nUnits, count1, countAll) 
@@ -99,24 +94,24 @@ unitCount <- function(folder1, folder2, filename1, filename2, method){
 #make data frames to store info from saved resamples
 LTSunits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "nCount" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resampData", i)
-  filename2 <- paste0("resampDetails", i)
+  filename1 <- paste0("resampData", i, "Repl")
+  filename2 <- paste0("resampDetails", i, "Repl")
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleLTS", filename1 = filename1, filename2 = filename2, method = "ds")
   LTSunits_Smono[i, 2:3] <- info
 }
 
 OptUnits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "nCount" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resampData", i)
-  filename2 <- paste0("resampDetails", i)
+  filename1 <- paste0("resampData", i, "Repl")
+  filename2 <- paste0("resampDetails", i, "Repl")
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleOpt", filename1 = filename1, filename2 = filename2, method = "ds")
   OptUnits_Smono[i, 2:3] <- info
 }
 
 GrBunits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "nCount" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resampData", i)
-  filename2 <- paste0("resampDetails", i)
+  filename1 <- paste0("resampData", i, "Repl")
+  filename2 <- paste0("resampDetails", i, "Repl")
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleGrB", filename1 = filename1, filename2 = filename2, method = "ds")
   GrBunits_Smono[i, 2:3] <- info
 }
@@ -124,36 +119,36 @@ for(i in 1:100){
 
 plot1sUnits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "singleCount" = integer(100), "nAll" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resample-300_1_single", i)
-  filename2 <- paste0("resample-300_1_single", i)
+  filename1 <- paste0("resample-600_1_single", i)
+  filename2 <- paste0("resample-600_1_single", i)
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleData1m", filename1 = filename1, filename2 = filename2, method = "plot")
   plot1sUnits_Smono[i, 2:4] <- info
 }
 plot1dUnits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "singleCount" = integer(100), "nAll" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resample-300_1_double", i)
-  filename2 <- paste0("resample-300_1_double", i)
+  filename1 <- paste0("resample-600_1_double", i)
+  filename2 <- paste0("resample-600_1_double", i)
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleData1m", filename1 = filename1, filename2 = filename2, method = "plot")
   plot1dUnits_Smono[i, 2:4] <- info
 }
 plot4sUnits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "singleCount" = integer(100), "nAll" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resample-300_1_single", i)
-  filename2 <- paste0("resample-300_1_single", i)
+  filename1 <- paste0("resample-600_1_single", i)
+  filename2 <- paste0("resample-600_1_single", i)
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleData4m", filename1 = filename1, filename2 = filename2, method = "plot")
   plot4sUnits_Smono[i, 2:4] <- info
 }
 
 plot4dUnits_Smono <- data.frame("round" = 1:100, "nUnits" = integer(100), "singleCount" = integer(100), "nAll" = integer(100))
 for(i in 1:100){
-  filename1 <- paste0("resample-300_1_double", i)
-  filename2 <- paste0("resample-300_1_double", i)
+  filename1 <- paste0("resample-600_1_double", i)
+  filename2 <- paste0("resample-600_1_double", i)
   info <- unitCount(folder1 = "resampleSmono", folder2 = "resampleData4m", filename1 = filename1, filename2 = filename2, method = "plot")
   plot4dUnits_Smono[i, 2:4] <- info
 }
 
 #fill in problem table with S and n
-problemsSM$S <- c(14, 21, 12, 25, 13, 18, 9)
+problemsSM$S <- c(29, 44, 25, 49, 25, 35, 18)
 problemsSM$mean.n_t[problemsSM$method=="LTS"] <- round(mean(LTSunits_Smono$nCount))
 problemsSM$mean.n_t[problemsSM$method=="Opt"] <- round(mean(OptUnits_Smono$nCount))
 problemsSM$mean.n_t[problemsSM$method=="GrB"] <- round(mean(GrBunits_Smono$nCount))
@@ -166,25 +161,24 @@ write.csv(problemsSM, "dataSim/problemsSM.csv")
 
 #SQ prop fail ----
 problemsSQ$method <- c("LTS", "Opt",  
-                       "plotS", "plotD", "LTSr", "Optr",  
-                       "plotSr", "plotDr")
+                       "plotS", "plotD")
 
 #prepare summaries for 'prop fail' column
-dsPropfailSQ <- aggregate(mySquadDistResults1$estD[!is.na(mySquadDistResults1$estD)], by = list(mySquadDistResults1$method[!is.na(mySquadDistResults1$estD)]), FUN = length)
+dsPropfailSQ <- aggregate(mySquadDistResults2$estD[!is.na(mySquadDistResults2$estD)], by = list(mySquadDistResults2$method[!is.na(mySquadDistResults2$estD)]), FUN = length)
 
-problemsSQ$prop.fail[1] <- 1- dsPropfailSQ$x[dsPropfailSQ$Group.1=="LTS"]/100
-problemsSQ$prop.fail[2] <- 1- dsPropfailSQ$x[dsPropfailSQ$Group.1=="Opt"]/100
+problemsSQ$prop.fail[1] <- 1- dsPropfailSQ$x[dsPropfailSQ$Group.1=="LTS"]/1000
+problemsSQ$prop.fail[2] <- 1- dsPropfailSQ$x[dsPropfailSQ$Group.1=="Opt"]/1000
 
 problemsSQ$prop.fail[3] <- NA
-problemsSQ$prop.fail[4] <- sum(is.na(PlotresultsSQ1$probOverall))/100
+problemsSQ$prop.fail[4] <- sum(is.na(PlotresultsSQ2$probOverall))/1000
 
-dsPropfailSQ2 <- aggregate(mySquadDistResults2$estD[!is.na(mySquadDistResults2$estD)], by = list(mySquadDistResults2$method[!is.na(mySquadDistResults2$estD)]), FUN = length)
-
-problemsSQ$prop.fail[5] <- 1- dsPropfailSQ2$x[dsPropfailSQ2$Group.1=="LTS"]/100
-problemsSQ$prop.fail[6] <- 1- dsPropfailSQ2$x[dsPropfailSQ2$Group.1=="Opt"]/100
-
-problemsSQ$prop.fail[7] <- NA
-problemsSQ$prop.fail[8] <- sum(is.na(PlotresultsSQ2$probOverall))/100
+# dsPropfailSQ2 <- aggregate(mySquadDistResults2$estD[!is.na(mySquadDistResults2$estD)], by = list(mySquadDistResults2$method[!is.na(mySquadDistResults2$estD)]), FUN = length)
+# 
+# problemsSQ$prop.fail[5] <- 1- dsPropfailSQ2$x[dsPropfailSQ2$Group.1=="LTS"]/100
+# problemsSQ$prop.fail[6] <- 1- dsPropfailSQ2$x[dsPropfailSQ2$Group.1=="Opt"]/100
+# 
+# problemsSQ$prop.fail[7] <- NA
+# problemsSQ$prop.fail[8] <- sum(is.na(PlotresultsSQ2$probOverall))/100
 
 #SQ mean p ----
 dsPSQ <- aggregate(mySquadDistResults1$p[!is.na(mySquadDistResults1$p)], by = list(mySquadDistResults1$method[!is.na(mySquadDistResults1$p)]), FUN = mean)

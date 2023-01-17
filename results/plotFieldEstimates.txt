@@ -1,0 +1,4 @@
+"type" "setUpCost"
+"1" "Smono1m" 10.2
+"2" "Smono4m" 11.14
+"3" "Squad" 7.08
