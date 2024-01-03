@@ -20,5 +20,9 @@ All scripts containing functions, simulated data generation and analyses are in 
 
 This is an archived version of the code that was used to produce the analyses in my thesis, 'Cost-efficient abundance estimation methods for high-density species' (Kathryn Knights, University of Melbourne, 2024). It may be viewed and downloaded for examination purposes, but is not intended for sharing or modification by third parties.
 
+To recreate the data frames and objects used for all analyses, run the scripts: scripts/tidyData.R and scripts/summaries.R. These are sourced at the top of all analysis scripts along with scripts containing any functions needed for the analysis.
+
 To recreate the simulated data for fig. 2.3 use the script scripts/pt1Sims_Boab.R
 Dataframes are saved in the dataSim/prelimMethods folder. The figure is created in scripts/biasPrecisionPlot.R
+
+To recreate the simulated surveys using resamples of field data for figs. 2.4 and 2.5, use scripts/stackhousiaResampling.R and scripts/senecioResampling.R. Dataframes are saved in dataSim/resampleSmono and dataSim/resampleSquad. The figure is created in scripts/comparisonPlots.R
