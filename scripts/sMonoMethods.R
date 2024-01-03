@@ -283,3 +283,23 @@ myNew2 <- newTransPointsSM[newTransPointsSM$id%in%add2more, ]
 mySet38 <- rbind(mySet36, myNew2)
 write.csv(mySet38, "Fieldwork/Evans St/SmonoCDSTrans_Most.csv")
 
+#Addendum: field methods appendix, December 2023
+
+# can't find the info in this script so recreating:
+# n targets counted in pilot plots
+# stackhousia:
+
+myNsm <- sum(myPlots[myPlots$area_m2==4 & myPlots$date=="2021-09-27", 12:15], na.rm = TRUE)
+
+#opt areas: #c is set up time (mean per unit), t is search time (per unit area), area is quadrat size (mean), counts needs to be a vector
+
+# set-up time not recorded, mean time for other similar sized plots is 11 mins (may include counting sticks????). Estimating 20 mins for all 5 plots
+# search time per unit area
+myTsm <- c(8, 16, 9, 12, 17.5)
+myTsm <- sum(myTsm)/(4*5)
+
+smPilot <- myPlots[myPlots$area_m2==4 & myPlots$date=="2021-09-27", ]
+smPilot$count <- rowSums(smPilot[,12:15], na.rm = TRUE)
+
+optSMplot <- qSizeOpt(c = 4, t = myTsm, counts = smPilot$count, area = 4)
+

@@ -11,14 +11,33 @@ c <- 4 #set up time
 d <- (3+8)/200 #density
 t <- 20/200
 counts <- c(3,8)
-countPerM <- counts/25
+countPerM <- counts/25 #ADDENDUM 2023: I think this is wrong!!! unless the pilot plots were 5 x 5 instead of 10 x 10???
 vCount <- var(countPerM)
 sdCount <- sd(countPerM)
 
 sizeOpt <- sqrt(c*d/(vCount*t))
 
 #optimal size given only 2 pilot quadrats is 12.8m
+#ADDENDUM, using exactly the same numbers in 2023 gives 10.5
 sides <- sqrt(sizeOpt)
+
+#ADDENDUM 2023: using the correct count per m if the plots were 100m^2
+countPerM <- counts/100
+vCount <- var(countPerM)
+
+sizeOpt <- sqrt(c*d/(vCount*t)) #42
+sides <- sqrt(sizeOpt) #6.5
+
+##ADDENDUM 2023: using the correct count per m if the plots were 25m^2
+d <- (3+8)/50 #density
+t <- 20/50
+countPerM <- counts/25
+vCount <- var(countPerM)
+
+sizeOpt <- sqrt(c*d/(vCount*t))
+sides <- sqrt(sizeOpt)
+
+#
 
 #just back of enveloping: if density is as above, and 
 #sigma is 10
@@ -201,3 +220,5 @@ myDet <- qFunc(p1=sum(myPlotData$kkPrimaryCount, na.rm = TRUE),
                p2=sum(myPlotData$SecObsPrimaryCount, na.rm = TRUE),
                s2=sum(myPlotData$SecObsSecondaryCount, na.rm = TRUE))
 
+# senecio - looks like I didn't use the two 10x10m plots as pilots (the optimal plot size is coming out super different)
+myNsq <- sum(myPlots[myPlots$target=="Senecio quadridentatus" & myPlots$date=="2021-09-27", 12:15], na.rm = TRUE)

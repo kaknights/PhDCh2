@@ -28,7 +28,7 @@ unitL <- c(2,25)
 nUnits <- round(budget/(myVars$nonSearchCost +(E*unitL*(myVars$Cm+myVars$Cw))))
 # this calculated total time per unit is much higher than my recorded times
 
-nSims <- 100
+nSims <- 10 # 10 for testing, 10 000 will take several hours to run (or days, depending on computing power available)
 
 ### DS SIMULATIONS ########
 #__________________________
@@ -46,12 +46,12 @@ myDsSimSM$error <- myDsSimSM$dhat-dm[1]
 myDsSimSM$method <- "DS"
 
 # EDIT FOLDER AND FILENAMES BEFORE SAVING
-write.table(myDsSimSM, "dataSim/prelimMethods/sm/myDsSimSM.txt")
+# write.table(myDsSimSM, "dataSim/prelimMethods/sm/myDsSimSM.txt")
 
 myDsSimSQ <- data.frame("simID" = numeric(length = nSims), "dhat" = numeric(nSims))
 
 for (simID in 1:nSims){
-  try(sim <- myDsSurvey(dm[2], budget, nUnits[2], sigm[2], w[2], siteAreaM[2], unitL[2]))
+  try(sim <- myDsSurvey(dm[2], nUnits[2], sigm[2], w[2], siteAreaM[2], unitL[2]))
   myDsSimSQ[simID,1] <- simID
   myDsSimSQ[simID,"dhat"] <- sim$dht$individuals$D$Estimate
   print(simID) 
@@ -60,14 +60,14 @@ for (simID in 1:nSims){
 myDsSimSQ$error <- myDsSimSQ$dhat-dm[2]
 myDsSimSQ$method <- "DS"
 
-plot(myDsSimSQ$dhat, myDsSimSQ$error)
-abline(v = dm[2], lty = "dashed")
-abline(h = 0, lty = "dotted")
-
-mean(myDsSimSQ$error)
+# plot(myDsSimSQ$dhat, myDsSimSQ$error)
+# abline(v = dm[2], lty = "dashed")
+# abline(h = 0, lty = "dotted")
+# 
+# mean(myDsSimSQ$error)
 
 # EDIT FOLDER AND FILENAMES BEFORE SAVING
-write.table(myDsSimSQ, "dataSim/prelimMethods/sq/myDsSimSQ.txt")
+# write.table(myDsSimSQ, "dataSim/prelimMethods/sq/myDsSimSQ.txt")
 
 # same exercise for plot vars
 
@@ -127,4 +127,4 @@ BiasPlot <- aggregate(myPlotData$error, by = list(myPlotData$p), FUN = mean)
 myPlotPlot <- merge(PrecisionPlot, BiasPlot, by = "Group.1")
 names(myPlotPlot) <- c("p", "precision", "bias")
 
-write.table(myPlotPlot, paste0("dataSim/prelimMethods/sq", "/myPlotPlotsq.txt"))
+# write.table(myPlotPlot, paste0("dataSim/prelimMethods/sq", "/myPlotPlotsq.txt"))

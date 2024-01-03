@@ -44,6 +44,13 @@ alphaOpt_Smono <- sqrt(Cw_Smono/(2*Cm_Smono))
 totallength <- sum(transSubset$length_m)
 speed <- totallength/timeSearching
 
+#Additions for appendix:
+# total pilot transect length:
+kSmonoPilot <- length(unique(mySubset$transectID))
+lSmonoPilot <- kSmonoPilot*unique(transSubset$length_m)
+nSmonoPilot <- nDet
+sMonoE <- nDet/lSmonoPilot
+
 #_______________________________________________________________________________
 
 ########### Senecio ###########
@@ -68,6 +75,13 @@ Cm_Squad <- timeMeas/nrow(myTransData)
 Rc_Squad <- timeMeas/timeSearch
 
 alphaOpt_Squad <- sqrt(1/(2*Rc_Squad))
+
+# Additions for appendix:
+# total pilot transect length and encounter rates:
+kSquadPilot <- length(unique(myTransData$transectID))
+lSquadPilot <- kSquadPilot*unique(myTimeData$length_m)
+nSquadPilot <- nrow(myTransData)
+sQuadE <- nSquadPilot/lSquadPilot
 
 rm(smDist, withinArea, mySubset, nDet, smTrans, include, transSubset, 
    totallength, speed, timeSearching, myTimeData, myTransData, timeTot,

@@ -34,8 +34,8 @@ UnbandedReplEffort <- 600
 # Stackhousia distance ----
 
 # Resamples take a subset of LTS distance survey data, runs distance analysis using LTS, Opt and Grouped methods using the same data (Opt method uses additional datafrom the LTS dataset)
-# resampleMany function takes LTS dataframes, creates tables required by ds functionin distance package (for LTS, Opt and GrB methods), runs distance models, stores results in a list.  n = number of resamples, effort = survey time in minutes
-#Resamples are done without replacement for ds and plot methods
+# resampleMany function takes LTS dataframes, creates tables required by ds function in distance package (for LTS, Opt and GrB methods), runs distance models, stores results in a list.  n = number of resamples, effort = survey time in minutes
+#Resamples are done with replacement for ds and plot methods
 #All obs are treated as individuals: cluster sizes are either 1 or NA in the LTS data, obs where 2 indivs were close enough to be treated as a cluster were v rare (these were also treated as 1 indiv in the plot data, so any bias as a result is the same-ish)
 
 

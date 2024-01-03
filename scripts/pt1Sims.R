@@ -2,12 +2,9 @@
 
 library(Distance)
 
-# problem: distance sims over-estimating
-#NOTE: length per individual transect, l (the sampling unit, such that sum of li = L, where L is the total length of transect), is arbitrarily chosen - we don't have an optimisation for this quantity.
-
 #NOTE: the suffix _1 on distResults in Ch2/dataSim/prelimMethods/ds means d = 10, sigm = 2, w = 5, budget = 960, cl = 1, Cm = 0.5, C_0 = 10
 
-# new set of pars with estimates from field data: use Senecio (much lower density - see if this makes a difference)
+# estimates from field data: 
 distEsts <- read.table("results/fieldEstimates.txt")
 plotEsts <- read.table("results/plotFieldEstimates.txt")
 
@@ -100,7 +97,6 @@ obs.table <- data.frame("Region.Label" = "Area_A",
 data <- obs[,-3]
 
 # analyse: model with ds function, save key results
-#NOTE: truncation argument - by default the function uses the largest distance as w unless w is supplied.  As simulated obs were made up to w specified by me in the sims, we should supply w.
 
 myMod <- ds(data = data, truncation = w, transect = "line", 
             formula = ~1, key = "hn", adjustment = NULL, 
@@ -219,5 +215,5 @@ plotSimResults <- function(probDet, plotSize){
 plot1results <- plotSimResults(probDet = probDet, plotSize = 1)
 plot16results <- plotSimResults(probDet = probDet, plotSize = 16)
 
-write.table(plot1results, "dataSim/prelimMethods/smallPlot/collatedResults_1.txt")
-write.table(plot16results, "dataSim/prelimMethods/largePlot/collatedResults_1.txt")
+#write.table(plot1results, "dataSim/prelimMethods/smallPlot/collatedResults_1.txt")
+#write.table(plot16results, "dataSim/prelimMethods/largePlot/collatedResults_1.txt")

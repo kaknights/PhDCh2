@@ -1,3 +1,5 @@
+
+#function to simulate a survey from sigma, density and w. dm is density per m^2, w is in m. UnitL is length in m
 myDsSurvey <- function(dm, nUnits, sigm, w, siteAreaM, unitL){
   dsAreaPerT <- 2*w*unitL # area covered by each transect in m^2
   dsExpNperT <- round(dsAreaPerT*dm) # expected n individuals in the area covered by 1 transect
@@ -68,6 +70,29 @@ distTables_OneOff <- function(distDetails, distData, w){
   return(tablesList)
 }
 
+# same as above for grouped data
+distTables_OneOffGR <- function(distDetails, distData, w){
+  region.table <- data.frame("Region.Label" = "EvansSt", "Area" = 
+                                 sum(distDetails$length_m)* (2*w))
+    sample.table <- data.frame("Sample.Label" = distDetails$transectID,
+                               "Region.Label" = "EvansSt",
+                               "Effort" = distDetails$length_m)
+    if(length(distData$obsID)>0){
+    obs.table <- data.frame("object" = distData$obsID,
+                            "Region.Label" = "EvansSt",
+                            "Sample.Label" = distData$transectID)
+    data <- data.frame("object" = distData$obsID,
+                       "distbegin" = distData$distbegin,
+                       "distend" = distData$distend)
+    if("clusterSize" %in% names(distData)){
+      data$size <- distData$clusterSize[!is.na(distData$perpDist_m)]
+    }
+    tablesList <- list(region.table, sample.table, obs.table, data)
+    } else {
+      tablesList <- list(region.table, sample.table)
+    }
+  return(tablesList)
+}
 
 myCVemp <- function(x){ # only if empirical, otherwise need (sd(x)/sqrt(n))
   sd(x)/mean(x)
@@ -97,7 +122,7 @@ qFunc <- function(p1, s1, p2, s2){
 #optimal quadrat size
 #s* = sqrt[c *d / (v * t)]
 
-qSizeOpt <- function(c, t, counts, area){ #c is set up time, t is search time, area is quadrat size
+qSizeOpt <- function(c, t, counts, area){ #c is set up time (mean per unit), t is search time (per unit area), area is quadrat size (mean), counts needs to be a vector
   countPerM <- counts/area
   vCount <- var(countPerM)
   d <- sum(counts)/(length(counts)*area)
@@ -235,10 +260,3 @@ resamplePlots <- function(plotDf, timesDF, budget, plotType){
   #se(d)_mod is based on the estimates of var D and var p on the point estimates for the sample (model based)
 }
 
-
-
-# Test info ----
-# plotDf <- mySquadPlots
-# timesDF <- times
-# budget <- 360
-# plotType <- "plot"
